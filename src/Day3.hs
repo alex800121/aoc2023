@@ -54,6 +54,6 @@ day3 = do
     . map snd
     $ parts
   putStrLn
-    . ("day3a: " ++)
+    . ("day3b: " ++)
     . show
     $ rawGears
