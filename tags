@@ -100,9 +100,11 @@ Game	/home/alex800121/haskell/aoc/2023/src/Day2.hs	16;"	t
 GameState	/home/alex800121/haskell/aoc/2019/src/Day11.hs	18;"	t
 GameState	/home/alex800121/haskell/aoc/2019/src/Day18.hs	48;"	t
 GameState	/home/alex800121/haskell/aoc/2019/src/Day23.hs	14;"	t
-Gondola	/home/alex800121/haskell/aoc/2023/src/Day3.hs	15;"	t
+Gondola	/home/alex800121/haskell/aoc/2023/src/Day3.hs	17;"	t
 Green	/home/alex800121/haskell/aoc/2023/src/Day2.hs	42;"	C
 H	/home/alex800121/haskell/aoc/2019/src/Day21.hs	26;"	C
+H	/home/alex800121/haskell/aoc/2023/src/Day7.hs	11;"	C
+Hand	/home/alex800121/haskell/aoc/2023/src/Day7.hs	11;"	t
 I	/home/alex800121/haskell/aoc/2019/src/Day21.hs	27;"	C
 Index	/home/alex800121/haskell/aoc/2019/src/Day10.hs	15;"	t
 Index	/home/alex800121/haskell/aoc/2019/src/Day11.hs	16;"	t
@@ -113,7 +115,7 @@ Index	/home/alex800121/haskell/aoc/2019/src/Day17.hs	22;"	t
 Index	/home/alex800121/haskell/aoc/2019/src/Day18.hs	28;"	t
 Index	/home/alex800121/haskell/aoc/2019/src/Day20.hs	37;"	t
 Index	/home/alex800121/haskell/aoc/2019/src/Day3.hs	8;"	t
-Index	/home/alex800121/haskell/aoc/2023/src/Day3.hs	11;"	t
+Index	/home/alex800121/haskell/aoc/2023/src/Day3.hs	13;"	t
 Index'	/home/alex800121/haskell/aoc/2019/src/Day10.hs	17;"	t
 Inner	/home/alex800121/haskell/aoc/2019/src/Day20.hs	22;"	C
 Instruction	/home/alex800121/haskell/aoc/2019/src/Day17.hs	26;"	t
@@ -132,6 +134,7 @@ Leaf	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	43;"	C
 Line	/home/alex800121/haskell/aoc/2019/src/Day3.hs	10;"	t
 M	/home/alex800121/haskell/aoc/2019/src/Day15.hs	22;"	t
 M	/home/alex800121/haskell/aoc/2019/src/Day18.hs	30;"	t
+M	/home/alex800121/haskell/aoc/2023/src/Day8.hs	13;"	t
 Main	/home/alex800121/haskell/aoc/2019/app/Main.hs	1;"	m
 Main	/home/alex800121/haskell/aoc/2023/app/Main.hs	1;"	m
 Map	/home/alex800121/haskell/aoc/2023/src/Day5.hs	8;"	t
@@ -165,10 +168,11 @@ PackageInfo_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64
 PackageInfo_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	4;"	m
 PackageInfo_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	4;"	m
 PackageInfo_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	4;"	m
+PackageInfo_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	4;"	m
 Paddle	/home/alex800121/haskell/aoc/2019/src/Day13.hs	21;"	C
 Parser	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	70;"	t
 Parser	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	70;"	t
-Part	/home/alex800121/haskell/aoc/2023/src/Day3.hs	13;"	t
+Part	/home/alex800121/haskell/aoc/2023/src/Day3.hs	15;"	t
 Paths_AOC2020	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	8;"	m
 Paths_AOC2020	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	8;"	m
 Paths_AOC2020	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	8;"	m
@@ -184,6 +188,7 @@ Paths_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux
 Paths_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	8;"	m
 Paths_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	8;"	m
 Paths_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	8;"	m
+Paths_AOC2020	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	8;"	m
 Perm	/home/alex800121/haskell/aoc/2019/src/Day22.hs	15;"	t
 Planet	/home/alex800121/haskell/aoc/2019/src/Day12.hs	23;"	t
 Planet	/home/alex800121/haskell/aoc/2019/src/Day6.hs	12;"	t
@@ -242,6 +247,7 @@ _children	/home/alex800121/haskell/aoc/2019/src/Day6.hs	10;"	f
 _dir	/home/alex800121/haskell/aoc/2019/src/Day11.hs	18;"	f
 _floor	/home/alex800121/haskell/aoc/2019/src/Day11.hs	18;"	f
 _halt	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	45;"	f
+_hand	/home/alex800121/haskell/aoc/2023/src/Day7.hs	11;"	f
 _id	/home/alex800121/haskell/aoc/2023/src/Day2.hs	17;"	f
 _index'	/home/alex800121/haskell/aoc/2019/src/Day10.hs	17;"	f
 _input	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	43;"	f
@@ -283,6 +289,9 @@ bindir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.
 bindir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 bindir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 bindir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+bindir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+buildCycle	/home/alex800121/haskell/aoc/2023/src/Day8.hs	25;"	f
+buildFormula	/home/alex800121/haskell/aoc/2023/src/Day9.hs	19;"	f
 buildIndex'	/home/alex800121/haskell/aoc/2019/src/Day10.hs	42;"	f
 buildKeyMap	/home/alex800121/haskell/aoc/2019/src/Day18.hs	64;"	f
 buildMainRoute	/home/alex800121/haskell/aoc/2019/src/Day17.hs	37;"	f
@@ -307,7 +316,13 @@ catchIO	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9
 catchIO	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	25;"	f
 catchIO	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	25;"	f
 catchIO	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	25;"	f
+catchIO	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	25;"	f
 collectOutput	/home/alex800121/haskell/aoc/2019/src/Day23.hs	16;"	f
+compareA	/home/alex800121/haskell/aoc/2023/src/Day7.hs	19;"	f
+compareB	/home/alex800121/haskell/aoc/2023/src/Day7.hs	37;"	f
+compareType	/home/alex800121/haskell/aoc/2023/src/Day7.hs	13;"	f
+compareTypeB	/home/alex800121/haskell/aoc/2023/src/Day7.hs	27;"	f
+convertHand	/home/alex800121/haskell/aoc/2023/src/Day7.hs	21;"	f
 copyright	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	22;"	f
 copyright	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	22;"	f
 copyright	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	22;"	f
@@ -323,6 +338,7 @@ copyright	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc
 copyright	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	22;"	f
 copyright	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	22;"	f
 copyright	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	22;"	f
+copyright	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	22;"	f
 countChildren	/home/alex800121/haskell/aoc/2019/src/Day6.hs	32;"	f
 datadir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 datadir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
@@ -339,6 +355,7 @@ datadir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9
 datadir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 datadir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 datadir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+datadir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
 day1	/home/alex800121/haskell/aoc/2019/src/Day1.hs	6;"	f
 day1	/home/alex800121/haskell/aoc/2023/src/Day1.hs	19;"	f
 day10	/home/alex800121/haskell/aoc/2019/src/Day10.hs	50;"	f
@@ -385,8 +402,7 @@ day25	/home/alex800121/haskell/aoc/2023/src/Day25.hs	3;"	f
 day2aBag	/home/alex800121/haskell/aoc/2023/src/Day2.hs	11;"	f
 day2b	/home/alex800121/haskell/aoc/2023/src/Day2.hs	46;"	f
 day3	/home/alex800121/haskell/aoc/2019/src/Day3.hs	40;"	f
-day3	/home/alex800121/haskell/aoc/2023/src/Day3.hs	33;"	f
-day3a	/home/alex800121/haskell/aoc/2023/src/Day3.hs	30;"	f
+day3	/home/alex800121/haskell/aoc/2023/src/Day3.hs	32;"	f
 day4	/home/alex800121/haskell/aoc/2019/src/Day4.hs	18;"	f
 day4	/home/alex800121/haskell/aoc/2023/src/Day4.hs	41;"	f
 day4a	/home/alex800121/haskell/aoc/2023/src/Day4.hs	24;"	f
@@ -397,13 +413,15 @@ day6	/home/alex800121/haskell/aoc/2019/src/Day6.hs	48;"	f
 day6	/home/alex800121/haskell/aoc/2023/src/Day6.hs	15;"	f
 day6b	/home/alex800121/haskell/aoc/2019/src/Day6.hs	43;"	f
 day7	/home/alex800121/haskell/aoc/2019/src/Day7.hs	24;"	f
-day7	/home/alex800121/haskell/aoc/2023/src/Day7.hs	3;"	f
+day7	/home/alex800121/haskell/aoc/2023/src/Day7.hs	64;"	f
 day7a	/home/alex800121/haskell/aoc/2019/src/Day7.hs	11;"	f
 day7b	/home/alex800121/haskell/aoc/2019/src/Day7.hs	14;"	f
 day8	/home/alex800121/haskell/aoc/2019/src/Day8.hs	11;"	f
-day8	/home/alex800121/haskell/aoc/2023/src/Day8.hs	3;"	f
+day8	/home/alex800121/haskell/aoc/2023/src/Day8.hs	41;"	f
+day8a	/home/alex800121/haskell/aoc/2023/src/Day8.hs	18;"	f
 day9	/home/alex800121/haskell/aoc/2019/src/Day9.hs	9;"	f
-day9	/home/alex800121/haskell/aoc/2023/src/Day9.hs	3;"	f
+day9	/home/alex800121/haskell/aoc/2023/src/Day9.hs	38;"	f
+day9a	/home/alex800121/haskell/aoc/2023/src/Day9.hs	33;"	f
 dfs	/home/alex800121/haskell/aoc/2019/src/Day15.hs	29;"	f
 digitsA	/home/alex800121/haskell/aoc/2023/src/Day1.hs	7;"	f
 digitsB	/home/alex800121/haskell/aoc/2023/src/Day1.hs	9;"	f
@@ -438,6 +456,7 @@ dynlibdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc
 dynlibdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 dynlibdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 dynlibdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+dynlibdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
 emcd	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	72;"	f
 emcd	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	72;"	f
 energy	/home/alex800121/haskell/aoc/2019/src/Day12.hs	54;"	f
@@ -448,6 +467,7 @@ f	/home/alex800121/haskell/aoc/2019/src/Day16.hs	7;"	f
 f	/home/alex800121/haskell/aoc/2019/src/Day19.hs	15;"	f
 f	/home/alex800121/haskell/aoc/2023/src/Day1.hs	13;"	f
 f	/home/alex800121/haskell/aoc/2023/src/Day6.hs	5;"	f
+factorial	/home/alex800121/haskell/aoc/2023/src/Day9.hs	14;"	f
 factors	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	229;"	f
 factors	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	229;"	f
 fastStep	/home/alex800121/haskell/aoc/2019/src/Day16.hs	14;"	f
@@ -463,6 +483,7 @@ firstRepeatBy	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	91;"	f
 fixMap	/home/alex800121/haskell/aoc/2023/src/Day5.hs	20;"	f
 focus	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	115;"	f
 focus	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	115;"	f
+fromChar	/home/alex800121/haskell/aoc/2023/src/Day7.hs	39;"	f
 fromVec	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	346;"	f
 fromVec	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	346;"	f
 fuel	/home/alex800121/haskell/aoc/2019/src/Day1.hs	3;"	f
@@ -482,6 +503,7 @@ getBinDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc
 getBinDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getBinDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getBinDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
+getBinDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
 getDataDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getDataDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getDataDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
@@ -497,6 +519,7 @@ getDataDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/gh
 getDataDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getDataDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getDataDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
+getDataDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
 getDataFileName	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	38;"	f
 getDataFileName	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	38;"	f
 getDataFileName	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	38;"	f
@@ -512,6 +535,7 @@ getDataFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-lin
 getDataFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	38;"	f
 getDataFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	38;"	f
 getDataFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	38;"	f
+getDataFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	38;"	f
 getDynLibDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getDynLibDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getDynLibDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
@@ -527,6 +551,7 @@ getDynLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/
 getDynLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getDynLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getDynLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
+getDynLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
 getLibDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getLibDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getLibDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
@@ -542,6 +567,7 @@ getLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc
 getLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
+getLibDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
 getLibexecDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getLibexecDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getLibexecDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
@@ -557,7 +583,8 @@ getLibexecDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux
 getLibexecDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getLibexecDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getLibexecDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
-getParts	/home/alex800121/haskell/aoc/2023/src/Day3.hs	17;"	f
+getLibexecDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
+getParts	/home/alex800121/haskell/aoc/2023/src/Day3.hs	19;"	f
 getSysconfDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getSysconfDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getSysconfDir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
@@ -573,6 +600,7 @@ getSysconfDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux
 getSysconfDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	43;"	f
 getSysconfDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	43;"	f
 getSysconfDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
+getSysconfDir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	43;"	f
 hexTo4Bits	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	165;"	f
 hexTo4Bits	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	165;"	f
 homepage	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	24;"	f
@@ -590,6 +618,7 @@ homepage	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-
 homepage	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	24;"	f
 homepage	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	24;"	f
 homepage	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	24;"	f
+homepage	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	24;"	f
 inc	/home/alex800121/haskell/aoc/2019/src/Day4.hs	12;"	f
 input	/home/alex800121/haskell/aoc/2019/src/Day4.hs	6;"	f
 inputIns	/home/alex800121/haskell/aoc/2019/src/Day21.hs	32;"	f
@@ -614,6 +643,7 @@ isPathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-lin
 isPathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	76;"	f
 isPathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	76;"	f
 isPathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	76;"	f
+isPathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	76;"	f
 joinFileName	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	65;"	f
 joinFileName	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	65;"	f
 joinFileName	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	65;"	f
@@ -629,6 +659,7 @@ joinFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/
 joinFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	65;"	f
 joinFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	65;"	f
 joinFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	65;"	f
+joinFileName	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	65;"	f
 jointEucVec	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	337;"	f
 jointEucVec	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	337;"	f
 jointEucVecs	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	343;"	f
@@ -653,6 +684,7 @@ libdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.
 libdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 libdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 libdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+libdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
 libexecdir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 libexecdir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 libexecdir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
@@ -668,6 +700,7 @@ libexecdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/gh
 libexecdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 libexecdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 libexecdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+libexecdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
 list	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	115;"	f
 list	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	115;"	f
 log2	/home/alex800121/haskell/aoc/2019/src/Day18.hs	62;"	f
@@ -679,6 +712,7 @@ manhattan	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	311;"	f
 manhattan	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	311;"	f
 mapFirst	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	109;"	f
 mapFirst	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	109;"	f
+mapParser	/home/alex800121/haskell/aoc/2023/src/Day8.hs	34;"	f
 mergeInstruction	/home/alex800121/haskell/aoc/2019/src/Day22.hs	63;"	f
 mkUBOC	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	74;"	f
 movePlanets	/home/alex800121/haskell/aoc/2019/src/Day12.hs	37;"	f
@@ -697,6 +731,7 @@ name	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.4.
 name	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	15;"	f
 name	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	15;"	f
 name	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	15;"	f
+name	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	15;"	f
 overlapEucVec	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	314;"	f
 overlapEucVec	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	314;"	f
 p	/home/alex800121/haskell/aoc/2019/src/Day16.hs	5;"	f
@@ -720,6 +755,7 @@ pathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux
 pathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	73;"	f
 pathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	73;"	f
 pathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	73;"	f
+pathSeparator	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	73;"	f
 pick	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	362;"	f
 pick	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	362;"	f
 pickAnySplit	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	31;"	f
@@ -737,6 +773,7 @@ readDefaultWith	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	55;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/Day18.hs	96;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/Day20.hs	39;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	84;"	f
+readIns	/home/alex800121/haskell/aoc/2023/src/Day8.hs	15;"	f
 readMap	/home/alex800121/haskell/aoc/2023/src/Day5.hs	10;"	f
 readPerm	/home/alex800121/haskell/aoc/2019/src/Day22.hs	19;"	f
 reduceAsteroid	/home/alex800121/haskell/aoc/2019/src/Day10.hs	31;"	f
@@ -754,6 +791,7 @@ stablized	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	103;"	f
 stablizedBy	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	97;"	f
 stablizedBy	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	97;"	f
 step	/home/alex800121/haskell/aoc/2019/src/Day16.hs	9;"	f
+sub	/home/alex800121/haskell/aoc/2023/src/Day9.hs	27;"	f
 subtractEucVec	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	325;"	f
 subtractEucVec	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	325;"	f
 subtractEucVecs	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	334;"	f
@@ -762,7 +800,7 @@ subtractEucVecs'	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	331;"	f
 subtractEucVecs'	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	331;"	f
 sumVariants	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	207;"	f
 sumVariants	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	207;"	f
-surroundings	/home/alex800121/haskell/aoc/2023/src/Day3.hs	28;"	f
+surroundings	/home/alex800121/haskell/aoc/2023/src/Day3.hs	30;"	f
 synopsis	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	20;"	f
 synopsis	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	20;"	f
 synopsis	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	20;"	f
@@ -778,6 +816,7 @@ synopsis	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-
 synopsis	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	20;"	f
 synopsis	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	20;"	f
 synopsis	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	20;"	f
+synopsis	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	20;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.6/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
@@ -793,13 +832,16 @@ sysconfdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/gh
 sysconfdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
 sysconfdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
+sysconfdir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	48;"	f
 tall	/home/alex800121/haskell/aoc/2019/src/Day8.hs	7;"	f
 target	/home/alex800121/haskell/aoc/2019/src/Day2.hs	14;"	f
+test	/home/alex800121/haskell/aoc/2023/src/Day9.hs	31;"	f
 testInput	/home/alex800121/haskell/aoc/2023/src/Day6.hs	12;"	f
 third	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	112;"	f
 third	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	112;"	f
 toBit	/home/alex800121/haskell/aoc/2019/src/Day18.hs	111;"	f
 toChar	/home/alex800121/haskell/aoc/2019/src/Day18.hs	114;"	f
+toChar	/home/alex800121/haskell/aoc/2023/src/Day7.hs	48;"	f
 toVec	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	350;"	f
 toVec	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	350;"	f
 twistKnotList	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	117;"	f
@@ -843,5 +885,7 @@ version	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9
 version	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	35;"	f
 version	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	17;"	f
 version	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.6.3/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	35;"	f
+version	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/PackageInfo_AOC2020.hs	17;"	f
+version	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9.8.1/AOC2020-0.1.0.0/x/AOC2023/build/AOC2023/autogen/Paths_AOC2020.hs	35;"	f
 wide	/home/alex800121/haskell/aoc/2019/src/Day8.hs	9;"	f
 x	/home/alex800121/haskell/aoc/2019/src/Day9.hs	7;"	f
