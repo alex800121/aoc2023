@@ -8,8 +8,9 @@
 module MyLib where
 
 import Control.Monad (guard, mplus)
+import Data.Array.IArray (IArray, Ix, array)
 import Data.Bits (xor)
-import Data.Char (digitToInt, intToDigit, isHexDigit, ord, chr)
+import Data.Char (chr, digitToInt, intToDigit, isHexDigit, ord)
 import Data.Foldable (Foldable (foldr'), toList)
 import Data.List (delete, foldl', group, nub, tails, uncons)
 import Data.List.Split (chunksOf)
@@ -26,8 +27,9 @@ import Text.Megaparsec
 import Text.Megaparsec.Char (space)
 import Text.Megaparsec.Char.Lexer (decimal, signed)
 
-drawASCII :: Integral a => [a] -> String
+drawASCII :: (Integral a) => [a] -> String
 drawASCII = map (chr . fromIntegral)
+
 pickAnySplit :: [a] -> [(a, [a])]
 pickAnySplit = f id
   where
@@ -169,6 +171,13 @@ hexTo4Bits l
 
 (!?) :: [a] -> Int -> Maybe a
 l !? i = if i < 0 || i >= length l then Nothing else Just (l !! i)
+
+drawArray :: (IArray a e) => [[e]] -> a (Int, Int) e
+drawArray xs = array ((0, 0), (x, y)) l
+  where
+    (x, y) = (maximum (map length xs) - 1, length xs - 1)
+    l = concat $ zipWith (\y' ys -> zipWith (\x' z -> ((x', y'), z)) [0 .. x] ys) [0..y] xs
+        
 
 drawMap :: (a -> Maybe b) -> [[a]] -> Map (Int, Int) b
 drawMap convert l = f 0 0
