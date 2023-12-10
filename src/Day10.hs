@@ -9,6 +9,7 @@ import Data.Maybe (fromMaybe)
 import Data.Set (Set)
 import qualified Data.Set as Set
 import MyLib (Direction (..), drawGraph, drawMap)
+import Debug.Trace (traceShow)
 
 type Index = (Int, Int)
 
@@ -28,15 +29,21 @@ toIndex South = south
 toIndex East = east
 toIndex West = west
 
-direction :: Char -> [Direction]
-direction '.' = []
-direction 'S' = [North, South, East, West]
-direction '-' = [East, West]
-direction '|' = [North, South]
-direction 'L' = [North, East]
-direction 'F' = [South, East]
-direction 'J' = [North, West]
-direction '7' = [South, West]
+toDirection :: Index -> Direction
+toDirection (0, -1) = North
+toDirection (0, 1) = South
+toDirection (1, 0) = East
+toDirection (-1, 0) = West
+
+direction :: Char -> Maybe [Direction]
+direction 'S' = Just [North, South, East, West]
+direction '-' = Just [East, West]
+direction '|' = Just [North, South]
+direction 'L' = Just [North, East]
+direction 'F' = Just [South, East]
+direction 'J' = Just [North, West]
+direction '7' = Just [South, West]
+direction _ = Nothing
 
 bfs :: M -> Set Index -> Set Index -> Int -> Int
 bfs m visited start acc
@@ -54,18 +61,37 @@ bfs m visited start acc
           )
           start
 
+walkPipe :: Map Index [Direction] -> Index -> (Index, Direction) -> (Set Index, Set Index) -> (Set Index, Set Index)
+walkPipe m initStart (i, d) acc
+  | traceShow (i, d, i') False = undefined
+  | i' == initStart = bimap s' s' acc'
+  | otherwise = walkPipe m initStart (i', d') acc'
+  where
+    f = bimap (+ fst i) (+ snd i)
+    turnLeft = pred d
+    turnRight = succ d
+    i' = f $ toIndex d
+    Just d' = find (/= pred turnLeft) $ m Map.! i'
+    acc' = bimap (Set.insert $ f $ toIndex turnLeft) (Set.insert $ f $ toIndex turnRight) acc
+    s' = (Set.\\ Map.keysSet m)
+
 adjacent = [north, south, east, west]
 
 day10 :: IO ()
 day10 = do
-  -- input' <- Map.mapWithKey (\(kx, ky) a -> map (bimap (+ kx) (+ ky)) a) . drawMap (Just . direction) . lines <$> readFile "input/test10.txt"
-  input'' <- drawMap Just . lines <$> readFile "input/input10.txt"
-  let input' = Map.mapWithKey (\(kx, ky) -> map (bimap (+ kx) (+ ky) . toIndex) . direction) input''
+  input'' <- drawMap direction . lines <$> readFile "input/test10.txt"
+  -- input'' <- drawMap direction . lines <$> readFile "input/input10.txt"
+  let input' = Map.mapWithKey (\(kx, ky) -> map (bimap (+ kx) (+ ky) . toIndex)) input''
       start' = Map.findMin $ Map.filter ((== 4) . length) input'
       start = second (filter ((fst start' `elem`) . fromMaybe [] . (input' Map.!?))) start'
+      startB = second (head . map (toDirection . bimap (subtract $ fst (fst start)) (subtract $ snd (fst start)))) start
       input = uncurry Map.insert start input'
       day10a = bfs input Set.empty (Set.singleton (fst start)) 0
   putStrLn
     . ("day10a: " ++)
     . show
     $ day10a
+  print startB
+  -- print input''
+  print $ walkPipe input'' (fst startB) startB (Set.empty, Set.empty)
+  -- print startB
