@@ -42,6 +42,11 @@ pickAnySplit = f id
 (-&) :: (Num a, Num b) => (a, b) -> (a, b) -> (a, b)
 (a, b) -& (c, d) = (a - c, b - d)
 
+-- pickN :: Int -> [a] -> [[a]]
+-- pickN n xs
+--   | n <= 0 = []
+--   | otherwise = [y : ys' | (y, ys) <- pickAnySplit xs, ys' <- pickN (n - 1) ys]
+
 data Tree a = Leaf a | Branch a [Tree a] deriving (Show, Eq, Ord)
 
 instance Functor Tree where
