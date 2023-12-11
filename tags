@@ -269,6 +269,7 @@ _win	/home/alex800121/haskell/aoc/2023/src/Day4.hs	12;"	f
 adjacent	/home/alex800121/haskell/aoc/2019/src/Day18.hs	46;"	f
 adjacent	/home/alex800121/haskell/aoc/2019/src/Day20.hs	127;"	f
 adjacent	/home/alex800121/haskell/aoc/2023/src/Day10.hs	78;"	f
+adjacent'	/home/alex800121/haskell/aoc/2023/src/Day10.hs	80;"	f
 applyAff	/home/alex800121/haskell/aoc/2019/src/Day22.hs	31;"	f
 applyPerm	/home/alex800121/haskell/aoc/2019/src/Day22.hs	15;"	f
 baseNToInt	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	153;"	f
@@ -277,6 +278,8 @@ baseNToInteger	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	150;"	f
 baseNToInteger	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	152;"	f
 bfs	/home/alex800121/haskell/aoc/2019/src/Day20.hs	102;"	f
 bfs	/home/alex800121/haskell/aoc/2023/src/Day10.hs	48;"	f
+bfs'	/home/alex800121/haskell/aoc/2023/src/Day10.hs	84;"	f
+bfs''	/home/alex800121/haskell/aoc/2023/src/Day10.hs	82;"	f
 binSearch	/home/alex800121/haskell/aoc/2019/src/Day14.hs	55;"	f
 bindir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/Paths_AOC2020.hs	48;"	f
 bindir	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/Paths_AOC2020.hs	48;"	f
@@ -363,7 +366,7 @@ datadir	/home/alex800121/haskell/aoc/2023/dist-newstyle/build/x86_64-linux/ghc-9
 day1	/home/alex800121/haskell/aoc/2019/src/Day1.hs	6;"	f
 day1	/home/alex800121/haskell/aoc/2023/src/Day1.hs	19;"	f
 day10	/home/alex800121/haskell/aoc/2019/src/Day10.hs	50;"	f
-day10	/home/alex800121/haskell/aoc/2023/src/Day10.hs	80;"	f
+day10	/home/alex800121/haskell/aoc/2023/src/Day10.hs	98;"	f
 day11	/home/alex800121/haskell/aoc/2019/src/Day11.hs	37;"	f
 day11	/home/alex800121/haskell/aoc/2023/src/Day11.hs	3;"	f
 day12	/home/alex800121/haskell/aoc/2019/src/Day12.hs	64;"	f
