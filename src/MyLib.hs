@@ -9,7 +9,7 @@ module MyLib where
 
 import Control.Monad (guard, mplus)
 import Data.Array.IArray (IArray, Ix, array)
-import Data.Bits (xor)
+import Data.Bits (Bits (..), FiniteBits (..), xor)
 import Data.Char (chr, digitToInt, intToDigit, isHexDigit, ord)
 import Data.Foldable (Foldable (foldr'), toList)
 import Data.List (delete, foldl', group, nub, tails, uncons)
@@ -160,6 +160,16 @@ baseNToInteger n = foldl' (\acc x -> (n * acc) + fromIntegral (digitToInt x)) 0
 baseNToInt :: Int -> String -> Int
 baseNToInt n = fromIntegral . baseNToInteger (fromIntegral n)
 
+toBits :: (FiniteBits a) => a -> String
+toBits x = f (len - 1)
+  where
+    len = finiteBitSize x
+    f n
+      | n < 0 = ""
+      | otherwise = g : f (n - 1)
+      where
+        g = if testBit x n then '1' else '0'
+
 intToBits :: Int -> String
 intToBits x
   | x == 0 = "0"
@@ -181,8 +191,7 @@ drawArray :: (IArray a e) => [[e]] -> a (Int, Int) e
 drawArray xs = array ((0, 0), (x, y)) l
   where
     (x, y) = (maximum (map length xs) - 1, length xs - 1)
-    l = concat $ zipWith (\y' ys -> zipWith (\x' z -> ((x', y'), z)) [0 .. x] ys) [0..y] xs
-        
+    l = concat $ zipWith (\y' ys -> zipWith (\x' z -> ((x', y'), z)) [0 .. x] ys) [0 .. y] xs
 
 drawMap :: (a -> Maybe b) -> [[a]] -> Map (Int, Int) b
 drawMap convert l = f 0 0
