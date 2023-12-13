@@ -38,8 +38,7 @@ common shared
         pqueue,
         dlist,
         finite-typelits,
-        groups,
-        wide-word
+        groups
     default-extensions: TypeFamilies, OverloadedRecordDot, TypeApplications, DataKinds
     ghc-options: -O2
 
