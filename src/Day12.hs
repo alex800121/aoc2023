@@ -11,11 +11,10 @@ import qualified Data.Map as Map
 import Debug.Trace (traceM, traceShow)
 import MyLib (toBits)
 
-inputParser :: String -> (String, (Int, [Int]))
-inputParser s = (x, (len, i))
+inputParser :: String -> (String, [Int])
+inputParser s = (x, i)
   where
     x : y : _ = words s
-    len = length x
     i = map read $ splitOn "," y
 
 stringToMask :: String -> (Word, Word)
@@ -63,6 +62,7 @@ intVariant x y
       ]
 
 calc :: String -> [Int] -> State (Map (String, [Int]) Int) Int
+calc [] (x: _) = return 0
 calc s [] = if '#' `notElem` s then return 1 else return 0
 calc s l@(x : xs) =
   get >>= \m -> case m Map.!? (s, l) of
@@ -74,17 +74,17 @@ calc s l@(x : xs) =
               . map (splitAt x . snd)
               . takeWhile (notElem '#' . fst)
               . (zip <$> inits <*> tails)
-              $ s
+              $ dropWhile (== '.') s
       i <- sum <$> forM ss (`calc` xs)
-      modify' (Map.insert (s, l) i)
+      modify' (Map.insert (dropWhile (== '.') s, l) i . Map.insert (s, l) i)
       return i
 
 day12 :: IO ()
 day12 = do
   input <- map inputParser . lines <$> readFile "input/input12.txt"
   let inputA = map (first stringToMask) input
-      day12a = runState (mapM (\(x, (_, y)) -> calc x y) input) Map.empty
-      day12b = runState (mapM (\(x, (_, y)) -> calc (intercalate "?" $ replicate 5 x) (concat $ replicate 5 y)) input) Map.empty
+      day12a = runState (mapM (uncurry calc) input) Map.empty
+      day12b = runState (mapM (\(x, y) -> calc (intercalate "?" $ replicate 5 x) (concat $ replicate 5 y)) input) Map.empty
   putStrLn
     . ("day12a: " ++)
     . show
