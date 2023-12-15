@@ -26,6 +26,7 @@ import Debug.Trace
 import Text.Megaparsec
 import Text.Megaparsec.Char (space)
 import Text.Megaparsec.Char.Lexer (decimal, signed)
+import Data.List (findIndex)
 
 drawASCII :: (Integral a) => [a] -> String
 drawASCII = map (chr . fromIntegral)
@@ -88,6 +89,14 @@ firstRepeat = g 0 []
   where
     g _ _ [] = Nothing
     g i s (x : xs) = if x `elem` s then Just (i, x) else g (i + 1) (x : s) xs
+
+firstCycle :: (Eq a) => [a] -> Maybe (Int, Int, a)
+firstCycle = g 0 []
+  where
+    g _ _ [] = Nothing
+    g i s (x : xs) = case findIndex (== x) s of
+      Nothing -> g (i + 1) (x : s) xs
+      Just y -> Just (i - y - 1, i, x)
 
 firstRepeat' :: (Ord a) => [a] -> Maybe (Int, a)
 firstRepeat' = g 0 Set.empty
