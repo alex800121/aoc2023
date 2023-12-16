@@ -1,10 +1,10 @@
 module Day16 where
 
 import Data.Array (Array, Ix (..), bounds, (!))
-import MyLib (Direction (..), drawArray)
-import Data.Bifunctor (Bifunctor(bimap))
+import Data.Bifunctor (Bifunctor (bimap))
 import Data.Set (Set)
 import qualified Data.Set as Set
+import MyLib (Direction (..), drawArray)
 
 type Index = (Int, Int)
 
@@ -23,23 +23,30 @@ toIndex South = (0, 1)
 toIndex West = (-1, 0)
 toIndex East = (1, 0)
 
-day16a :: Array Index Char -> Set Beam -> Set Beam -> Set Beam
-day16a a visited s
+calc :: Array Index Char -> Set Beam -> Set Beam -> Set Beam
+calc a visited s
   | Set.null s' = visited
-  | otherwise = day16a a visited' (Set.unions (Set.map (f a) s'))
+  | otherwise = calc a visited' (Set.unions (Set.map (calcSingle a) s'))
   where
     b = bounds a
     s' = Set.filter (inRange b . fst) s Set.\\ visited
     visited' = Set.union visited s'
-    f a (i, d) 
-      | inRange b i = Set.fromList i'
-      | otherwise = Set.empty
-      where
-        d' = reflect (a ! i) d
-        i' = map ((,) <$> (bimap (+ fst i) (+ snd i) . toIndex) <*> id) d'
+
+calcSingle a (i, d)
+  | inRange b i = Set.fromList i'
+  | otherwise = Set.empty
+  where
+    b = bounds a
+    d' = reflect (a ! i) d
+    i' = map ((,) <$> (bimap (+ fst i) (+ snd i) . toIndex) <*> id) d'
+
+type Cache = Array (Index, Direction) Int
+
+calcCache :: Array Index Char -> Set Beam -> Set Beam -> Int
+calcCache a = undefined
 
 day16 :: IO ()
 day16 = do
   input <- drawArray @Array . lines <$> readFile "input/input16.txt"
   -- input <- drawArray @Array . lines <$> readFile "input/test16.txt"
-  print $ length $ Set.map fst $ day16a input Set.empty $ Set.singleton ((0, 0), East)
+  print $ length $ Set.map fst $ calc input Set.empty $ Set.singleton ((0, 0), East)

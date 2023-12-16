@@ -8,15 +8,16 @@
 module MyLib where
 
 import Control.Monad (guard, mplus)
-import Data.Array.IArray (IArray, Ix, array)
+import Data.Array.IArray (IArray, array)
 import Data.Bits (Bits (..), FiniteBits (..), xor)
 import Data.Char (chr, digitToInt, intToDigit, isHexDigit, ord)
 import Data.Foldable (Foldable (foldr'), toList)
-import Data.List (delete, foldl', group, nub, tails, uncons)
+import Data.Ix (Ix (..))
+import Data.List (delete, findIndex, foldl', group, nub, tails, uncons, elemIndex)
 import Data.List.Split (chunksOf)
 import Data.Map (Map)
 import qualified Data.Map as Map
-import Data.Maybe (fromMaybe, mapMaybe, maybeToList)
+import Data.Maybe (fromMaybe, mapMaybe, maybeToList, fromJust)
 import Data.Proxy (Proxy (..))
 import qualified Data.Sequence as S
 import Data.Set (Set)
@@ -26,7 +27,6 @@ import Debug.Trace
 import Text.Megaparsec
 import Text.Megaparsec.Char (space)
 import Text.Megaparsec.Char.Lexer (decimal, signed)
-import Data.List (findIndex)
 
 drawASCII :: (Integral a) => [a] -> String
 drawASCII = map (chr . fromIntegral)
@@ -74,6 +74,15 @@ instance Enum Direction where
     1 -> East
     2 -> South
     3 -> West
+
+instance Ix Direction where
+  range (a, b) = f a
+    where
+      f n
+        | n == b = [b]
+        | otherwise = a : f (succ n)
+  index (a, b) = fromJust . (`elemIndex` range (a, b))
+  inRange (a, b) = (`elem` range (a, b))
 
 type Parser = Parsec Void String
 
