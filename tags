@@ -13,6 +13,7 @@ Affine	/home/alex800121/haskell/aoc/2019/src/Day22.hs	17;"	t
 B	/home/alex800121/haskell/aoc/2019/src/Day21.hs	20;"	C
 Bag	/home/alex800121/haskell/aoc/2023/src/Day2.hs	14;"	t
 Ball	/home/alex800121/haskell/aoc/2019/src/Day13.hs	22;"	C
+Beam	/home/alex800121/haskell/aoc/2023/src/Day16.hs	11;"	t
 BigDeck	/home/alex800121/haskell/aoc/2019/src/Day22.hs	59;"	t
 Block	/home/alex800121/haskell/aoc/2019/src/Day15.hs	16;"	t
 Block	/home/alex800121/haskell/aoc/2019/src/Day18.hs	22;"	t
@@ -24,6 +25,7 @@ Branch	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	51;"	C
 C	/home/alex800121/haskell/aoc/2019/src/Day21.hs	21;"	C
 C	/home/alex800121/haskell/aoc/2023/src/Day4.hs	10;"	C
 Cabinet	/home/alex800121/haskell/aoc/2019/src/Day13.hs	27;"	t
+Cache	/home/alex800121/haskell/aoc/2023/src/Day12.hs	17;"	t
 Card	/home/alex800121/haskell/aoc/2023/src/Day4.hs	10;"	t
 Color	/home/alex800121/haskell/aoc/2023/src/Day2.hs	40;"	t
 Cons	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	252;"	C
@@ -118,6 +120,7 @@ Index	/home/alex800121/haskell/aoc/2019/src/Day20.hs	37;"	t
 Index	/home/alex800121/haskell/aoc/2019/src/Day3.hs	8;"	t
 Index	/home/alex800121/haskell/aoc/2023/src/Day10.hs	13;"	t
 Index	/home/alex800121/haskell/aoc/2023/src/Day11.hs	10;"	t
+Index	/home/alex800121/haskell/aoc/2023/src/Day16.hs	9;"	t
 Index	/home/alex800121/haskell/aoc/2023/src/Day3.hs	13;"	t
 Index'	/home/alex800121/haskell/aoc/2019/src/Day10.hs	17;"	t
 Inner	/home/alex800121/haskell/aoc/2019/src/Day20.hs	22;"	C
@@ -307,7 +310,7 @@ buildKeyMap	/home/alex800121/haskell/aoc/2019/src/Day18.hs	64;"	f
 buildMainRoute	/home/alex800121/haskell/aoc/2019/src/Day17.hs	37;"	f
 buildOrbit	/home/alex800121/haskell/aoc/2019/src/Day6.hs	29;"	f
 buildTarget	/home/alex800121/haskell/aoc/2019/src/Day14.hs	26;"	f
-calc	/home/alex800121/haskell/aoc/2023/src/Day12.hs	20;"	f
+calc	/home/alex800121/haskell/aoc/2023/src/Day12.hs	19;"	f
 calc	/home/alex800121/haskell/aoc/2023/src/Day15.hs	40;"	f
 calcDistance	/home/alex800121/haskell/aoc/2019/src/Day3.hs	31;"	f
 candidates	/home/alex800121/haskell/aoc/2019/src/Day7.hs	8;"	f
@@ -379,7 +382,7 @@ day10	/home/alex800121/haskell/aoc/2023/src/Day10.hs	77;"	f
 day11	/home/alex800121/haskell/aoc/2019/src/Day11.hs	37;"	f
 day11	/home/alex800121/haskell/aoc/2023/src/Day11.hs	19;"	f
 day12	/home/alex800121/haskell/aoc/2019/src/Day12.hs	64;"	f
-day12	/home/alex800121/haskell/aoc/2023/src/Day12.hs	39;"	f
+day12	/home/alex800121/haskell/aoc/2023/src/Day12.hs	44;"	f
 day12b	/home/alex800121/haskell/aoc/2019/src/Day12.hs	57;"	f
 day13	/home/alex800121/haskell/aoc/2019/src/Day13.hs	68;"	f
 day13	/home/alex800121/haskell/aoc/2023/src/Day13.hs	23;"	f
@@ -391,7 +394,8 @@ day15	/home/alex800121/haskell/aoc/2023/src/Day15.hs	43;"	f
 day15a	/home/alex800121/haskell/aoc/2023/src/Day15.hs	14;"	f
 day15b	/home/alex800121/haskell/aoc/2023/src/Day15.hs	34;"	f
 day16	/home/alex800121/haskell/aoc/2019/src/Day16.hs	16;"	f
-day16	/home/alex800121/haskell/aoc/2023/src/Day16.hs	3;"	f
+day16	/home/alex800121/haskell/aoc/2023/src/Day16.hs	41;"	f
+day16a	/home/alex800121/haskell/aoc/2023/src/Day16.hs	26;"	f
 day17	/home/alex800121/haskell/aoc/2019/src/Day17.hs	82;"	f
 day17	/home/alex800121/haskell/aoc/2023/src/Day17.hs	3;"	f
 day18	/home/alex800121/haskell/aoc/2019/src/Day18.hs	147;"	f
@@ -659,7 +663,7 @@ input	/home/alex800121/haskell/aoc/2019/src/Day4.hs	6;"	f
 inputIns	/home/alex800121/haskell/aoc/2019/src/Day21.hs	32;"	f
 inputOpCode	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	107;"	f
 inputParser	/home/alex800121/haskell/aoc/2019/src/Day14.hs	18;"	f
-inputParser	/home/alex800121/haskell/aoc/2023/src/Day12.hs	14;"	f
+inputParser	/home/alex800121/haskell/aoc/2023/src/Day12.hs	11;"	f
 intToBits	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	156;"	f
 intToBits	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	182;"	f
 intersect	/home/alex800121/haskell/aoc/2019/src/Day3.hs	22;"	f
@@ -822,6 +826,7 @@ readIns	/home/alex800121/haskell/aoc/2023/src/Day8.hs	15;"	f
 readMap	/home/alex800121/haskell/aoc/2023/src/Day5.hs	10;"	f
 readPerm	/home/alex800121/haskell/aoc/2019/src/Day22.hs	19;"	f
 reduceAsteroid	/home/alex800121/haskell/aoc/2019/src/Day10.hs	31;"	f
+reflect	/home/alex800121/haskell/aoc/2023/src/Day16.hs	13;"	f
 rowRock	/home/alex800121/haskell/aoc/2023/src/Day14.hs	6;"	f
 run	/home/alex800121/haskell/aoc/2019/src/Day11.hs	20;"	f
 runOpCodeWith	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	110;"	f
@@ -895,6 +900,7 @@ toChar	/home/alex800121/haskell/aoc/2019/src/Day18.hs	114;"	f
 toChar	/home/alex800121/haskell/aoc/2023/src/Day7.hs	48;"	f
 toDirection	/home/alex800121/haskell/aoc/2023/src/Day10.hs	31;"	f
 toIndex	/home/alex800121/haskell/aoc/2023/src/Day10.hs	25;"	f
+toIndex	/home/alex800121/haskell/aoc/2023/src/Day16.hs	20;"	f
 toVec	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	350;"	f
 toVec	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	382;"	f
 turnRoll	/home/alex800121/haskell/aoc/2023/src/Day14.hs	18;"	f
