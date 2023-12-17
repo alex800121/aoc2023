@@ -75,12 +75,16 @@ instance Enum Direction where
     2 -> South
     3 -> West
 
+instance Bounded Direction where
+  minBound = North
+  maxBound = West
+  
 instance Ix Direction where
   range (a, b) = f a
     where
       f n
         | n == b = [b]
-        | otherwise = a : f (succ n)
+        | otherwise = n : f (succ n)
   index (a, b) = fromJust . (`elemIndex` range (a, b))
   inRange (a, b) = (`elem` range (a, b))
 
