@@ -402,7 +402,7 @@ day16b	/home/alex800121/haskell/aoc/2023/src/Day16.hs	49;"	f
 day17	/home/alex800121/haskell/aoc/2019/src/Day17.hs	82;"	f
 day17	/home/alex800121/haskell/aoc/2023/src/Day17.hs	3;"	f
 day18	/home/alex800121/haskell/aoc/2019/src/Day18.hs	147;"	f
-day18	/home/alex800121/haskell/aoc/2023/src/Day18.hs	22;"	f
+day18	/home/alex800121/haskell/aoc/2023/src/Day18.hs	30;"	f
 day19	/home/alex800121/haskell/aoc/2019/src/Day19.hs	26;"	f
 day19	/home/alex800121/haskell/aoc/2023/src/Day19.hs	3;"	f
 day19a	/home/alex800121/haskell/aoc/2019/src/Day19.hs	8;"	f
@@ -825,6 +825,7 @@ readDefaultWith	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	55;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/Day18.hs	96;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/Day20.hs	39;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	84;"	f
+readInput	/home/alex800121/haskell/aoc/2023/src/Day18.hs	21;"	f
 readIns	/home/alex800121/haskell/aoc/2023/src/Day15.hs	19;"	f
 readIns	/home/alex800121/haskell/aoc/2023/src/Day8.hs	15;"	f
 readMap	/home/alex800121/haskell/aoc/2023/src/Day5.hs	10;"	f
