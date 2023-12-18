@@ -1,7 +1,7 @@
 module Day18 where
 
 import Data.Colour.Word8
-import MyLib (Direction, Parser)
+import MyLib (Direction (..), Parser, signedInteger)
 import Text.Megaparsec
 import Text.Megaparsec.Char
 import Data.List (foldl')
@@ -16,10 +16,19 @@ readColour8 = do
   r <- f <$> count 2 hexDigitChar
   g <- f <$> count 2 hexDigitChar
   b <- f <$> count 2 hexDigitChar
-  eof
   return $ Colour8 r g b
+
+readInput :: Parser DigPlan
+readInput = do
+  d <- (char 'R' >> pure East) <|> (char 'D' >> pure South) <|> (char 'L' >> pure West) <|> (char 'U' >> pure North)
+  space
+  i <- signedInteger
+  space
+  c <- between (char '(') (char ')') readColour8
+  pure (d, i, c)
 
 day18 :: IO ()
 day18 = do
-  -- input <- readFile "input/input18.txt"
-  return ()
+  input <- map (parseMaybe readInput) . lines <$> readFile "input/input18.txt"
+  print input
+  parseTest readInput "R 6 (#70c710)"
