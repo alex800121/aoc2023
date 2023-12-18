@@ -26,7 +26,6 @@ C	/home/alex800121/haskell/aoc/2019/src/Day21.hs	21;"	C
 C	/home/alex800121/haskell/aoc/2023/src/Day4.hs	10;"	C
 Cabinet	/home/alex800121/haskell/aoc/2019/src/Day13.hs	27;"	t
 Cache	/home/alex800121/haskell/aoc/2023/src/Day12.hs	17;"	t
-Cache	/home/alex800121/haskell/aoc/2023/src/Day16.hs	47;"	t
 Card	/home/alex800121/haskell/aoc/2023/src/Day4.hs	10;"	t
 Color	/home/alex800121/haskell/aoc/2023/src/Day2.hs	40;"	t
 Cons	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	252;"	C
@@ -314,7 +313,6 @@ buildTarget	/home/alex800121/haskell/aoc/2019/src/Day14.hs	26;"	f
 calc	/home/alex800121/haskell/aoc/2023/src/Day12.hs	19;"	f
 calc	/home/alex800121/haskell/aoc/2023/src/Day15.hs	40;"	f
 calc	/home/alex800121/haskell/aoc/2023/src/Day16.hs	30;"	f
-calcCache	/home/alex800121/haskell/aoc/2023/src/Day16.hs	49;"	f
 calcDistance	/home/alex800121/haskell/aoc/2019/src/Day3.hs	31;"	f
 calcSingle	/home/alex800121/haskell/aoc/2023/src/Day16.hs	39;"	f
 candidates	/home/alex800121/haskell/aoc/2019/src/Day7.hs	8;"	f
@@ -398,8 +396,8 @@ day15	/home/alex800121/haskell/aoc/2023/src/Day15.hs	43;"	f
 day15a	/home/alex800121/haskell/aoc/2023/src/Day15.hs	14;"	f
 day15b	/home/alex800121/haskell/aoc/2023/src/Day15.hs	34;"	f
 day16	/home/alex800121/haskell/aoc/2019/src/Day16.hs	16;"	f
-day16	/home/alex800121/haskell/aoc/2023/src/Day16.hs	78;"	f
-day16b	/home/alex800121/haskell/aoc/2023/src/Day16.hs	68;"	f
+day16	/home/alex800121/haskell/aoc/2023/src/Day16.hs	59;"	f
+day16b	/home/alex800121/haskell/aoc/2023/src/Day16.hs	49;"	f
 day17	/home/alex800121/haskell/aoc/2019/src/Day17.hs	82;"	f
 day17	/home/alex800121/haskell/aoc/2023/src/Day17.hs	3;"	f
 day18	/home/alex800121/haskell/aoc/2019/src/Day18.hs	147;"	f
