@@ -2,7 +2,7 @@
 
 module Day16 where
 
-import Data.Array (Array, Ix (..), bounds, (!))
+import Data.Array.Unboxed (UArray, Ix (..), bounds, (!))
 import qualified Data.Array as A
 import Data.Bifunctor (Bifunctor (bimap))
 import Data.Set (Set)
@@ -27,7 +27,7 @@ toIndex South = (0, 1)
 toIndex West = (-1, 0)
 toIndex East = (1, 0)
 
-calc :: Array Index Char -> Set Beam -> Set Beam -> Set Beam
+calc :: UArray Index Char -> Set Beam -> Set Beam -> Set Beam
 calc a visited s
   | Set.null s' = visited
   | otherwise = calc a visited' (Set.unions (Set.map (calcSingle a) s'))
@@ -36,6 +36,7 @@ calc a visited s
     s' = Set.filter (inRange b . fst) s Set.\\ visited
     visited' = Set.union visited s'
 
+calcSingle :: UArray Index Char -> Beam -> Set Beam
 calcSingle a (i, d)
   | inRange b i = Set.fromList i'
   | otherwise = Set.empty
@@ -44,29 +45,9 @@ calcSingle a (i, d)
     d' = reflect (a ! i) d
     i' = map ((,) <$> (bimap (+ fst i) (+ snd i) . toIndex) <*> id) d'
 
-type Cache = Array Beam (Set Beam)
 
-calcCache :: Array Index Char -> Beam -> Set Beam
-calcCache a = getCache
-  where
-    getCache = (cache A.!)
-    b@((minX, minY), (maxX, maxY)) = bounds a
-    b' = bimap (,North) (,West) b
-    cache =
-      A.array
-        b'
-        [(i, calc' Set.empty (Set.singleton i)) | i <- range b']
-    calc' visited s
-      | Set.null s' = visited
-      | otherwise = Set.unions $ Set.map getCache  nexts
-      where
-        f x = Set.filter (inRange b . fst) x Set.\\ visited
-        s' = f s
-        visited' = Set.union visited s'
-        nexts = f $ Set.unions $ Set.map (calcSingle a) s'
-
-day16b :: Array Index Char -> Int
-day16b a = maximum $ map (length . Set.map fst . calcCache a) edges
+day16b :: UArray Index Char -> Int
+day16b a = maximum $ map (length . Set.map fst . calc a Set.empty . Set.singleton) edges
   where
     ((minX, minY), (maxX, maxY)) = bounds a
     edges =
@@ -77,7 +58,7 @@ day16b a = maximum $ map (length . Set.map fst . calcCache a) edges
 
 day16 :: IO ()
 day16 = do
-  input <- drawArray @Array . lines <$> readFile "input/input16.txt"
+  input <- drawArray @UArray . lines <$> readFile "input/input16.txt"
   -- input <- drawArray @Array . lines <$> readFile "input/test16.txt"
   putStrLn
     . ("day16a: " ++)
