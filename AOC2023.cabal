@@ -39,7 +39,8 @@ common shared
         dlist,
         finite-typelits,
         groups,
-        AC-Colour
+        AC-Colour,
+        lens
     default-extensions: TypeFamilies, OverloadedRecordDot, TypeApplications, DataKinds
     ghc-options: -O2
 

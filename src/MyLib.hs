@@ -13,11 +13,11 @@ import Data.Bits (Bits (..), FiniteBits (..), xor)
 import Data.Char (chr, digitToInt, intToDigit, isHexDigit, ord)
 import Data.Foldable (Foldable (foldr'), toList)
 import Data.Ix (Ix (..))
-import Data.List (delete, findIndex, foldl', group, nub, tails, uncons, elemIndex)
+import Data.List (delete, elemIndex, findIndex, foldl', group, nub, tails, uncons)
 import Data.List.Split (chunksOf)
 import Data.Map (Map)
 import qualified Data.Map as Map
-import Data.Maybe (fromMaybe, mapMaybe, maybeToList, fromJust)
+import Data.Maybe (fromJust, fromMaybe, mapMaybe, maybeToList)
 import Data.Proxy (Proxy (..))
 import qualified Data.Sequence as S
 import Data.Set (Set)
@@ -64,6 +64,12 @@ instance Traversable Tree where
 
 data Direction = North | East | South | West deriving (Show, Eq, Ord)
 
+toIndex :: Direction -> (Int, Int)
+toIndex North = (0, -1)
+toIndex South = (0, 1)
+toIndex East = (1, 0)
+toIndex West = (-1, 0)
+
 instance Enum Direction where
   fromEnum North = 0
   fromEnum East = 1
@@ -78,7 +84,7 @@ instance Enum Direction where
 instance Bounded Direction where
   minBound = North
   maxBound = West
-  
+
 instance Ix Direction where
   range (a, b) = f a
     where
@@ -403,6 +409,21 @@ vZipWith f (Cons x xs) (Cons y ys) = Cons (f x y) $ vZipWith f xs ys
 
 vTail :: Vec (S n) a -> Vec n a
 vTail (Cons _ xs) = xs
+
+vRead :: (Integral i) => Vec n a -> i -> a
+vRead Nil _ = error "out of bound"
+vRead (Cons x xs) i
+  | i <= 0 = x
+  | otherwise = vRead xs (i - 1)
+
+vModify :: (Integral i) => Vec n a -> i -> (a -> a) -> Vec n a
+vModify Nil _ _ = Nil
+vModify xs'@(Cons x xs) i f
+  | i < 0 = xs'
+  | i == 0 = Cons (f x) xs
+  | otherwise = Cons x (vModify xs (i - 1) f)
+
+vWrite v i = vModify v i . const
 
 pick :: Int -> [a] -> [[a]]
 pick n l
