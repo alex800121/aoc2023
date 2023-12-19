@@ -38,7 +38,8 @@ common shared
         pqueue,
         dlist,
         finite-typelits,
-        groups
+        groups,
+        AC-Colour
     default-extensions: TypeFamilies, OverloadedRecordDot, TypeApplications, DataKinds
     ghc-options: -O2
 

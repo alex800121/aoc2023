@@ -81,6 +81,7 @@ Day8	/home/alex800121/haskell/aoc/2019/src/Day8.hs	1;"	m
 Day8	/home/alex800121/haskell/aoc/2023/src/Day8.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2019/src/Day9.hs	1;"	m
 Day9	/home/alex800121/haskell/aoc/2023/src/Day9.hs	1;"	m
+DigPlan	/home/alex800121/haskell/aoc/2023/src/Day18.hs	10;"	t
 Direction	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	57;"	t
 Direction	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	65;"	t
 Donut	/home/alex800121/haskell/aoc/2019/src/Day20.hs	33;"	t
@@ -401,7 +402,7 @@ day16b	/home/alex800121/haskell/aoc/2023/src/Day16.hs	49;"	f
 day17	/home/alex800121/haskell/aoc/2019/src/Day17.hs	82;"	f
 day17	/home/alex800121/haskell/aoc/2023/src/Day17.hs	3;"	f
 day18	/home/alex800121/haskell/aoc/2019/src/Day18.hs	147;"	f
-day18	/home/alex800121/haskell/aoc/2023/src/Day18.hs	3;"	f
+day18	/home/alex800121/haskell/aoc/2023/src/Day18.hs	22;"	f
 day19	/home/alex800121/haskell/aoc/2019/src/Day19.hs	26;"	f
 day19	/home/alex800121/haskell/aoc/2023/src/Day19.hs	3;"	f
 day19a	/home/alex800121/haskell/aoc/2019/src/Day19.hs	8;"	f
@@ -818,6 +819,7 @@ primeSeive	/home/alex800121/haskell/aoc/2019/src/MyLib.hs	239;"	f
 primeSeive	/home/alex800121/haskell/aoc/2023/src/MyLib.hs	284;"	f
 printOutput	/home/alex800121/haskell/aoc/2019/src/Day21.hs	60;"	f
 readAffine	/home/alex800121/haskell/aoc/2019/src/Day22.hs	25;"	f
+readColour8	/home/alex800121/haskell/aoc/2023/src/Day18.hs	12;"	f
 readDefault	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	64;"	f
 readDefaultWith	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	55;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/Day18.hs	96;"	f
