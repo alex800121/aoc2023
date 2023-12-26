@@ -30,6 +30,29 @@ solveXY (Cons (x0, tx0) (Cons (y0, ty0) _)) (Cons (x1, tx1) (Cons (y1, ty1) _)) 
     r = Matrix.fromLists [[x1 - x0], [y1 - y0]]
     invL = Matrix.inverse l
 
+buildSolution :: (Fractional a) => Hail a -> Hail a -> ([[a]], [a])
+buildSolution
+  (Cons (x0, vx0) (Cons (y0, vy0) (Cons (z0, vz0) Nil)))
+  (Cons (x1, vx1) (Cons (y1, vy1) (Cons (z1, vz1) Nil))) =
+    ( [ [vy0 - vy1, vx1 - vx0, 0, y1 - y0, x0 - x1, 0],
+        [0, vz0 - vz1, vy1 - vy0, 0, z1 - z0, y0 - y1]
+      ],
+      [ x0 * vy0 + y1 * vx1 - y0 * vx0 - x1 * vy1,
+        y0 * vz0 + z1 * vy1 - z0 * vy0 - y1 * vz1
+      ]
+    )
+
+-- day24b :: (Fractional a, Eq a) => [Hail a] -> Matrix a
+day24b hs = invM * n
+  where
+    [x, y, z, w] = take 4 hs
+    (a, b) = buildSolution x y
+    (c, d) = buildSolution y z
+    (e, f) = buildSolution z w
+    m = Matrix.fromLists (a ++ c ++ e)
+    n = Matrix.fromLists $ map (: []) $ b ++ d ++ f
+    Right invM = Matrix.inverse m
+
 day24 :: IO ()
 day24 = do
   input <- lines <$> readFile "input/input24.txt"
@@ -43,6 +66,13 @@ day24 = do
     . ("day24a: " ++)
     . show
     . length
-    . filter id
-    . map (\[x, y] -> maybe False (\(a, b) -> a >= minA && b >= minA && a <= maxA && b <= maxA) $ solveXY x y)
+    . filter (\[x, y] -> maybe False (\(a, b) -> a >= minA && b >= minA && a <= maxA && b <= maxA) $ solveXY x y)
     $ pick 2 hails
+  putStrLn
+    . ("day24b: " ++)
+    . show
+    . round
+    . sum
+    . take 3
+    . Matrix.toList
+    $ day24b hails
