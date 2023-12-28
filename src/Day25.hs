@@ -26,4 +26,4 @@ day25 :: IO ()
 day25 = do
   -- (g, nodeFromVertex, vertexFromKey) <- readInput <$> readFile "input/input25.txt"
   (g, nodeFromVertex, vertexFromKey) <- readInput <$> readFile "input/test25.txt"
-  print $ scc g
+  print $ components g
