@@ -42,7 +42,8 @@ common shared
         lens,
         unordered-containers,
         hashable,
-        matrix
+        matrix,
+        random
     default-extensions: TypeFamilies, OverloadedRecordDot, TypeApplications, DataKinds
     ghc-options: -O2
 
