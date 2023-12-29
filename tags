@@ -114,6 +114,7 @@ F	/home/alex800121/haskell/aoc/2019/src/Day21.hs	24;"	C
 Field	/home/alex800121/haskell/aoc/2023/src/Day19.hs	24;"	t
 Flip	/home/alex800121/haskell/aoc/2023/src/Day20.hs	52;"	C
 Floor	/home/alex800121/haskell/aoc/2019/src/Day11.hs	14;"	t
+G	/home/alex800121/haskell/aoc/2023/src/Day25.hs	16;"	t
 G	/home/alex800121/haskell/aoc/2019/src/Day11.hs	18;"	C
 G	/home/alex800121/haskell/aoc/2019/src/Day18.hs	48;"	C
 G	/home/alex800121/haskell/aoc/2019/src/Day21.hs	25;"	C
@@ -444,6 +445,7 @@ compareA	/home/alex800121/haskell/aoc/2023/src/Day7.hs	19;"	f
 compareB	/home/alex800121/haskell/aoc/2023/src/Day7.hs	37;"	f
 compareType	/home/alex800121/haskell/aoc/2023/src/Day7.hs	13;"	f
 compareTypeB	/home/alex800121/haskell/aoc/2023/src/Day7.hs	27;"	f
+contraction	/home/alex800121/haskell/aoc/2023/src/Day25.hs	30;"	f
 convertHand	/home/alex800121/haskell/aoc/2023/src/Day7.hs	21;"	f
 copyright	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/build/autogen/PackageInfo_AOC2020.hs	22;"	f
 copyright	/home/alex800121/haskell/aoc/2019/dist-newstyle/build/x86_64-linux/ghc-9.4.5/AOC2020-0.1.0.0/x/AOC2019/build/AOC2019/autogen/PackageInfo_AOC2020.hs	22;"	f
@@ -531,7 +533,7 @@ day24	/home/alex800121/haskell/aoc/2019/src/Day24.hs	3;"	f
 day24	/home/alex800121/haskell/aoc/2023/src/Day24.hs	56;"	f
 day24b	/home/alex800121/haskell/aoc/2023/src/Day24.hs	46;"	f
 day25	/home/alex800121/haskell/aoc/2019/src/Day25.hs	3;"	f
-day25	/home/alex800121/haskell/aoc/2023/src/Day25.hs	25;"	f
+day25	/home/alex800121/haskell/aoc/2023/src/Day25.hs	51;"	f
 day2aBag	/home/alex800121/haskell/aoc/2023/src/Day2.hs	11;"	f
 day2b	/home/alex800121/haskell/aoc/2023/src/Day2.hs	46;"	f
 day3	/home/alex800121/haskell/aoc/2019/src/Day3.hs	40;"	f
@@ -1028,7 +1030,7 @@ readInput	/home/alex800121/haskell/aoc/2019/src/Day18.hs	96;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/Day20.hs	39;"	f
 readInput	/home/alex800121/haskell/aoc/2019/src/OpCode.hs	84;"	f
 readInput	/home/alex800121/haskell/aoc/2023/src/Day18.hs	36;"	f
-readInput	/home/alex800121/haskell/aoc/2023/src/Day25.hs	11;"	f
+readInput	/home/alex800121/haskell/aoc/2023/src/Day25.hs	18;"	f
 readIns	/home/alex800121/haskell/aoc/2023/src/Day15.hs	19;"	f
 readIns	/home/alex800121/haskell/aoc/2023/src/Day8.hs	15;"	f
 readMap	/home/alex800121/haskell/aoc/2023/src/Day5.hs	10;"	f
