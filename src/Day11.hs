@@ -2,6 +2,7 @@
 
 module Day11 where
 
+import Paths_AOC2023
 import Data.List (transpose)
 import Data.Map (Map)
 import qualified Data.Map as Map
@@ -18,7 +19,7 @@ expandLine n f (x : xs) = if f x then replicate n x ++ expandLine n f xs else x 
 
 day11 :: IO ()
 day11 = do
-  input <- lines <$> readFile "input/input11.txt"
+  input <- lines <$>(getDataDir >>= readFile . (++ "/input/input11.txt")) 
   -- input <- lines <$> readFile "input/test11.txt"
   let expandF = expandLine 2 (all (== '.'))
       expandF3 = expandLine 3 (all (== '.'))

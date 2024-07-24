@@ -1,5 +1,6 @@
 module Day8 where
 
+import Paths_AOC2023
 import Data.List.Split (splitOn)
 import Data.Map (Map)
 import qualified Data.Map as Map
@@ -41,7 +42,7 @@ mapParser s = Map.singleton start (f1, f2)
 day8 :: IO ()
 day8 = do
   -- ins : m : _ <- splitOn "\n\n" <$> readFile "input/test8.txt"
-  ins : m : _ <- splitOn "\n\n" <$> readFile "input/input8.txt"
+  ins : m : _ <- splitOn "\n\n" <$>(getDataDir >>= readFile . (++ "/input/input8.txt")) 
   let initMap = Map.unions $ map mapParser $ lines m
       a = day8a initMap (cycle ins) "AAA" "ZZZ" 0
       starts = filter ((== 'A') . last) $ Map.keys initMap

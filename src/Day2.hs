@@ -1,12 +1,12 @@
 module Day2 where
 
+import Paths_AOC2023
 import Data.Vector.Unboxed (Vector)
 import qualified Data.Vector.Unboxed as V
 import qualified Data.Vector.Unboxed.Mutable as M
 import MyLib (Parser, signedInteger)
 import Text.Megaparsec
 import Text.Megaparsec.Char
-import Text.Megaparsec.Char (space)
 
 day2aBag :: Bag
 day2aBag = V.fromList [12, 13, 14]
@@ -48,15 +48,15 @@ day2b = V.foldr (*) 1 . foldr (V.zipWith max) (V.fromList [0, 0, 0]) . _bag
 
 day2 :: IO ()
 day2 = do
-  Just input <- traverse (parseMaybe parseGame) . lines <$> readFile "input/input2.txt"
-  putStrLn 
+  Just input <- traverse (parseMaybe parseGame) . lines <$> (getDataDir >>= readFile . (++ "/input/input2.txt"))
+  putStrLn
     . ("day2a: " ++)
     . show
     . sum
     . map _id
     . filter (validGame day2aBag)
     $ input
-  putStrLn 
+  putStrLn
     . ("day2b: " ++)
     . show
     . sum

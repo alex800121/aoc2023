@@ -2,6 +2,7 @@ module Day14 where
 
 import Data.List (transpose, unfoldr)
 import MyLib (firstCycle, firstRepeat, firstRepeat')
+import Paths_AOC2023
 
 rowRock :: String -> String
 rowRock = f 0 0
@@ -23,7 +24,7 @@ cycleRoll = (!! 4) . iterate turnRoll
 day14 :: IO ()
 day14 = do
   -- input <- lines <$> readFile "input/test14.txt"
-  input <- lines <$> readFile "input/input14.txt"
+  input <- lines <$> (getDataDir >>= readFile . (++ "/input/input14.txt"))
   let xs = iterate cycleRoll input
       Just (x, y, z) = firstCycle xs
       c = y - x
