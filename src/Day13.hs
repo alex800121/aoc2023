@@ -1,5 +1,6 @@
 module Day13 where
 
+import Paths_AOC2023
 import Data.List (transpose)
 import Data.List.Split (splitOn)
 import Data.Maybe (mapMaybe)
@@ -22,7 +23,7 @@ getSym' (x : xs) = f [x] xs
 
 day13 :: IO ()
 day13 = do
-  input <- map lines . splitOn "\n\n" <$> readFile "input/input13.txt"
+  input <- map lines . splitOn "\n\n" <$>(getDataDir >>= readFile . (++ "/input/input13.txt")) 
   let hs = mapMaybe getSym input
       vs = mapMaybe (getSym . transpose) input
       hs' = mapMaybe getSym' input

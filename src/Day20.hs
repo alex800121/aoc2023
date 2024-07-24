@@ -7,13 +7,14 @@ module Day20 where
 
 import Data.Bifunctor (Bifunctor (..))
 import Data.Function (on)
-import qualified Data.HashMap.Strict as H
+import Data.HashMap.Strict qualified as H
 import Data.Hashable (Hashable)
 import Data.List (find, findIndex, findIndices, foldl1', (\\))
 import Data.Maybe (fromMaybe, mapMaybe)
 import Debug.Trace
 import GHC.Generics (Generic)
 import MyLib
+import Paths_AOC2023
 import Text.Megaparsec
 import Text.Megaparsec.Char
 
@@ -115,7 +116,7 @@ fixConjInput g =
 day20 :: IO ()
 day20 = do
   -- input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> readFile "input/test20.txt"
-  input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> readFile "input/input20.txt"
+  input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
   let targets = ["js", "zb", "rr", "bs"]
       l = iterate (pushButton targets) (input, ((0, []), (0, 0)))
   putStrLn

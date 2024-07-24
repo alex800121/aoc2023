@@ -3,12 +3,13 @@ module Day23 where
 import Data.Array.Unboxed
 import Data.Bifunctor (Bifunctor (..))
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Maybe (mapMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Debug.Trace
 import MyLib
+import Paths_AOC2023
 
 type M = Map Index (Map Index Int)
 
@@ -87,7 +88,7 @@ expandM =
 
 day23 :: IO ()
 day23 = do
-  input <- drawArray @UArray . lines <$> readFile "input/input23.txt"
+  input <- drawArray @UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input23.txt"))
   -- input <- drawArray @UArray . lines <$> readFile "input/test23.txt"
   let b = bounds input
       start = (fst (fst b) + 1, snd (fst b))

@@ -3,16 +3,17 @@
 
 module Day21 where
 
-import qualified Data.Array.Unboxed as U
+import Data.Array.Unboxed qualified as U
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (intToDigit)
 import Data.List (find, unfoldr)
 import Data.Map.Strict (Map)
-import qualified Data.Map.Strict as Map
+import Data.Map.Strict qualified as Map
 import Data.Maybe (mapMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import MyLib (drawArray, drawGraph, toIndex)
+import Paths_AOC2023
 
 type M = U.UArray Index Char
 
@@ -114,7 +115,7 @@ calcCorner limit lenHalf lenSide m = e + o
 
 day21 :: IO ()
 day21 = do
-  input <- drawArray @U.UArray . lines <$> readFile "input/input21.txt"
+  input <- drawArray @U.UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input21.txt"))
   let Just start = fst <$> find ((== 'S') . snd) (U.assocs input)
       ((minX, minY), (maxX, maxY)) = U.bounds input
       cornerStarts =
