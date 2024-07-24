@@ -1,12 +1,13 @@
 module Day17 where
 
-import qualified Data.Array.Unboxed as U
+import Data.Array.Unboxed qualified as U
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (digitToInt)
-import qualified Data.PQueue.Prio.Min as Q
+import Data.PQueue.Prio.Min qualified as Q
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import MyLib
+import Paths_AOC2023
 
 data GameState = G
   { _location :: Index,
@@ -54,7 +55,7 @@ day17 :: IO ()
 day17 = do
   -- input <- U.amap digitToInt . drawArray @U.UArray . lines <$> readFile "input/test17a.txt"
   -- input <- U.amap digitToInt . drawArray @U.UArray . lines <$> readFile "input/test17.txt"
-  input <- U.amap digitToInt . drawArray @U.UArray . lines <$> readFile "input/input17.txt"
+  input <- U.amap digitToInt . drawArray @U.UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input17.txt"))
   putStrLn
     . ("day17a: " ++)
     . show

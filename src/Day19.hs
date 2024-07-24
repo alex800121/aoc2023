@@ -4,11 +4,12 @@ import Control.Lens
 import Data.List (foldl')
 import Data.List.Split (splitOn)
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Maybe (mapMaybe, maybeToList)
 import Debug.Trace
 import MyLib hiding (S)
-import qualified MyLib as M
+import MyLib qualified as M
+import Paths_AOC2023
 import Text.Megaparsec
 import Text.Megaparsec.Char
 
@@ -168,7 +169,7 @@ calcXMAS x = sum $ map ($ x) [_getX, _getM, _getA, _getS]
 day19 :: IO ()
 day19 = do
   -- x : y : _ <- map lines . splitOn "\n\n" <$> readFile "input/test19.txt"
-  x : y : _ <- map lines . splitOn "\n\n" <$> readFile "input/input19.txt"
+  x : y : _ <- map lines . splitOn "\n\n" <$> (getDataDir >>= readFile . (++ "/input/input19.txt"))
   let rules = Map.unions $ mapMaybe (parseMaybe parseRules) x
       xmas = mapMaybe (parseMaybe parseXMAS) y
   putStrLn

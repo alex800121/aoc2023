@@ -2,6 +2,7 @@
 
 module Day16 where
 
+import Paths_AOC2023
 import Data.Array.Unboxed (UArray, Ix (..), bounds, (!))
 import qualified Data.Array as A
 import Data.Bifunctor (Bifunctor (bimap))
@@ -58,7 +59,7 @@ day16b a = maximum $ map (length . Set.map fst . calc a Set.empty . Set.singleto
 
 day16 :: IO ()
 day16 = do
-  input <- drawArray @UArray . lines <$> readFile "input/input16.txt"
+  input <- drawArray @UArray . lines <$>(getDataDir >>= readFile . (++ "/input/input16.txt")) 
   -- input <- drawArray @Array . lines <$> readFile "input/test16.txt"
   putStrLn
     . ("day16a: " ++)

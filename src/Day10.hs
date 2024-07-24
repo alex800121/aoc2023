@@ -4,11 +4,12 @@ import Data.Bifunctor (Bifunctor (..))
 import Data.Ix (Ix (inRange))
 import Data.List (find)
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import MyLib (Direction (..), drawMap)
+import Paths_AOC2023
 
 type Index = (Int, Int)
 
@@ -76,7 +77,7 @@ bfs' ks visited start
 
 day10 :: IO ()
 day10 = do
-  input' <- drawMap direction . lines <$> readFile "input/input10.txt"
+  input' <- drawMap direction . lines <$> (getDataDir >>= readFile . (++ "/input/input10.txt"))
   let start' = Map.findMin $ Map.filter ((== 4) . length) input'
       start = second (filter (\x -> x `elem` (maybe [] (map (succ . succ)) . (input' Map.!?) . bimap (+ fst (fst start')) (+ snd (fst start'))) (toIndex x))) start'
       startB = second head start

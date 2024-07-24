@@ -1,13 +1,14 @@
 module Day3 where
 
+import Paths_AOC2023
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (digitToInt, isNumber)
 import Data.List (find)
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Maybe (isJust, mapMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import MyLib
 
 type Index = (Int, Int)
@@ -32,7 +33,7 @@ surroundings = [(x, y) | x <- [-1 .. 1], y <- [-1 .. 1], (x, y) /= (0, 0)]
 day3 :: IO ()
 day3 = do
   -- (rawParts, gondolas) <- getParts <$> readFile "input/test3.txt"
-  (rawParts, gondolas) <- getParts <$> readFile "input/input3.txt"
+  (rawParts, gondolas) <- getParts <$> (getDataDir >>= readFile . (++ "/input/input3.txt"))
   let parts = Set.filter (any (`Map.member` gondolas) . fst) rawParts
       gondolas' = Map.filter (== '*') gondolas
       rawGears =

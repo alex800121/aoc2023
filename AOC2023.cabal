@@ -1,5 +1,5 @@
-cabal-version:      3.0
-name:               AOC2020
+cabal-version:      3.4
+name:               AOC2023
 version:            0.1.0.0
 
 -- A short (one-line) description of the package.
@@ -22,7 +22,7 @@ maintainer:         alex800121@hotmail.com
 extra-source-files: CHANGELOG.md
 
 common shared
-    default-language: Haskell2010
+    default-language: GHC2021
     build-depends:
         base >= 4.18,
         megaparsec,
@@ -43,14 +43,14 @@ common shared
         unordered-containers,
         hashable,
         matrix,
-        random
+        random,
+        AOC
     default-extensions: TypeFamilies, OverloadedRecordDot, TypeApplications, DataKinds
     ghc-options: -O2
 
 library
     import: shared
     exposed-modules:
-        MyLib,
         Day1,
         Day2,
         Day3,
@@ -75,11 +75,12 @@ library
         Day22,
         Day23,
         Day24,
-        Day25,
-        Main
+        Day25
 
     -- Modules included in this library but not exported.
-    -- other-modules:
+    other-modules:
+        Paths_AOC2023
+        
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -118,7 +119,7 @@ executable AOC2023
         Day23,
         Day24,
         Day25,
-        MyLib
+        Paths_AOC2023
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:

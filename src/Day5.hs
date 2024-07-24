@@ -4,6 +4,7 @@ import Data.Function (on)
 import Data.List (foldl', scanl', sortBy)
 import Data.List.Split (chunksOf, splitOn)
 import Debug.Trace (traceShow)
+import Paths_AOC2023
 
 type Map = [(Int, Int, Int)]
 
@@ -33,7 +34,7 @@ useMapRange ((start, end, offset) : xs) (sStart, sEnd) = lowerRange ++ midRange 
 day5 :: IO ()
 day5 = do
   -- x : xs <- splitOn "\n\n" <$> readFile "input/test5.txt"
-  x : xs <- splitOn "\n\n" <$> readFile "input/input5.txt"
+  x : xs <- splitOn "\n\n" <$> (getDataDir >>= readFile . (++ "/input/input5.txt"))
   let input = map (fixMap . readMap) xs
       seeds = map (read @Int) . tail . words $ x
       seedRange = map (\(x : y : _) -> (x, x + y)) $ chunksOf 2 seeds
@@ -48,4 +49,5 @@ day5 = do
     . minimum
     . map fst
     $ concatMap (\x -> foldl' (\acc y -> concatMap (useMapRange y) acc) [x] input) seedRange
-    -- $ map (\x -> scanl' (\acc y -> concatMap (useMapRange y) acc) [x] input) seedRange
+
+-- \$ map (\x -> scanl' (\acc y -> concatMap (useMapRange y) acc) [x] input) seedRange

@@ -8,12 +8,13 @@ import Data.Function (on)
 import Data.Ix (inRange)
 import Data.List (foldl', scanl')
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Maybe (fromJust)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Debug.Trace
 import MyLib (Direction (..), Parser, drawGraph, signedInteger, toIndex)
+import Paths_AOC2023
 import Text.Megaparsec
 import Text.Megaparsec.Char
 
@@ -101,7 +102,7 @@ walk = f (0.5, 0.5) . angles
 day18 :: IO ()
 day18 = do
   -- input <- map (fromJust . parseMaybe readInput) . lines <$> readFile "input/test18.txt"
-  input <- map (fromJust . parseMaybe readInput) . lines <$> readFile "input/input18.txt"
+  input <- map (fromJust . parseMaybe readInput) . lines <$> (getDataDir >>= readFile . (++ "/input/input18.txt"))
   let (hole, holeR, holeL) = dig $ map fst input
       frl = angles $ map snd input
       f = round . (/ 2) . abs . shoelace

@@ -5,6 +5,7 @@ import Data.Char (digitToInt, intToDigit)
 import Data.Function (on)
 import Data.List (group, partition, sort, sortBy)
 import GHC.Read
+import Paths_AOC2023
 import Text.ParserCombinators.ReadP (ReadP, get, many)
 import Text.ParserCombinators.ReadPrec (lift)
 
@@ -63,7 +64,7 @@ instance Read Hand where
 
 day7 :: IO ()
 day7 = do
-  input <- map ((\(x : y : _) -> (read @Hand x, read @Int y)) . words) . lines <$> readFile "input/input7.txt"
+  input <- map ((\(x : y : _) -> (read @Hand x, read @Int y)) . words) . lines <$> (getDataDir >>= readFile . (++ "/input/input7.txt"))
   -- input <- map ((\(x : y : _) -> (read @Hand x, read @Int y)) . words) . lines <$> readFile "input/test7.txt"
   putStrLn
     . ("day7a: " ++)

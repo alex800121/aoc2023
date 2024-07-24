@@ -1,11 +1,13 @@
 {-# LANGUAGE TupleSections #-}
+
 module Day4 where
 
+import Data.List (intersect, (\\))
+import Data.Maybe (mapMaybe)
 import MyLib
+import Paths_AOC2023
 import Text.Megaparsec
 import Text.Megaparsec.Char
-import Data.Maybe (mapMaybe)
-import Data.List ((\\), intersect)
 
 data Card = C
   { _cardId :: Int,
@@ -28,7 +30,6 @@ day4a c
   where
     n = length $ _num c `intersect` _win c
 
-
 day4b :: [(Card, Int)] -> [(Card, Int)]
 day4b [] = []
 day4b ((c, i) : xs) = (c, i) : day4b xs'
@@ -37,11 +38,11 @@ day4b ((c, i) : xs) = (c, i) : day4b xs'
     matched = length $ _num c `intersect` _win c
     ys = replicate matched i ++ repeat 0
     f y = fmap (+ y)
-  
+
 day4 :: IO ()
 day4 = do
   -- input <- mapMaybe (parseMaybe cardParser) . lines <$> readFile "input/test4.txt"
-  input <- mapMaybe (parseMaybe cardParser) . lines <$> readFile "input/input4.txt"
+  input <- mapMaybe (parseMaybe cardParser) . lines <$> (getDataDir >>= readFile . (++ "/input/input4.txt"))
   putStrLn
     . ("day4a: " ++)
     . show
@@ -54,4 +55,3 @@ day4 = do
     . map snd
     . day4b
     $ map (,1) input
-

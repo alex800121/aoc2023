@@ -1,5 +1,6 @@
 module Day12 where
 
+import Paths_AOC2023
 import Control.Monad.Trans.State.Strict (State, evalState, get, modify, modify')
 import qualified Data.Array as A
 import Data.Bifunctor (Bifunctor (..))
@@ -43,7 +44,7 @@ calc x y = calc' x y
 
 day12 :: IO ()
 day12 = do
-  input <- map inputParser . lines <$> readFile "input/input12.txt"
+  input <- map inputParser . lines <$>(getDataDir >>= readFile . (++ "/input/input12.txt")) 
   -- input <- map inputParser . lines <$> readFile "input/test12.txt"
   putStrLn
     . ("day12a: " ++)

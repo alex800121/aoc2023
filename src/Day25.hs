@@ -6,11 +6,12 @@ import Data.Bifunctor (Bifunctor (..))
 import Data.List (group, sort)
 import Data.List.Split (splitOn)
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.MultiSet (MultiSet)
-import qualified Data.MultiSet as MS
+import Data.MultiSet qualified as MS
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
+import Paths_AOC2023
 import System.Random
 
 type G = Map (Set String) (MultiSet String)
@@ -50,7 +51,7 @@ contraction a g
 
 day25 :: IO ()
 day25 = do
-  m <- readInput <$> readFile "input/input25.txt"
+  m <- readInput <$> (getDataDir >>= readFile . (++ "/input/input25.txt"))
   -- m <- readInput <$> readFile "input/test25.txt"
   putStrLn
     . ("day25a: " ++)

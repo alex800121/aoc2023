@@ -1,5 +1,6 @@
 module Day15 where
 
+import Paths_AOC2023
 import Control.Monad.ST.Strict (ST, runST)
 import Data.Char (chr, isAlpha, ord)
 import Data.Foldable (foldlM)
@@ -42,7 +43,7 @@ calc = sum . zipWith (*) [1 ..] . map snd
 
 day15 :: IO ()
 day15 = do
-  input <- splitOn "," . init <$> readFile "input/input15.txt"
+  input <- splitOn "," . init <$>(getDataDir >>= readFile . (++ "/input/input15.txt")) 
   putStrLn
     . ("day15a: " ++)
     . show

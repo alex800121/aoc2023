@@ -2,6 +2,7 @@ module Day9 where
 
 import Data.List (scanl1)
 import Debug.Trace (traceShow)
+import Paths_AOC2023
 
 {-
 10  13  16  21  30  45  68  -> f3 n = C3 + (map f2 [0..n]) = C3 + (C2 * n) + (C1 * (n - 1) * n / 2) + (C0 * (n - 2) * (n - 1) * n / 3!), C3 = 10, C2 = 3, C1 = 0, C0 = 2
@@ -37,7 +38,7 @@ day9a = buildFormula
 
 day9 :: IO ()
 day9 = do
-  input <- map (map (read @Int) . words) . lines <$> readFile "input/input9.txt"
+  input <- map (map (read @Int) . words) . lines <$> (getDataDir >>= readFile . (++ "/input/input9.txt"))
   putStrLn
     . ("day9a: " ++)
     . show

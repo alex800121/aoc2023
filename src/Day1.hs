@@ -3,6 +3,7 @@ module Day1 where
 import Data.Char (digitToInt, intToDigit, isDigit)
 import Data.List (find, inits, isPrefixOf, isSuffixOf, tails)
 import Data.Maybe (isJust, mapMaybe)
+import Paths_AOC2023
 
 digitsA = [[intToDigit x] | x <- [1 .. 9]] `zip` [1 .. 9]
 
@@ -19,7 +20,7 @@ f digits s = 10 * x + y
 day1 :: IO ()
 day1 = do
   -- input <- lines <$> readFile "input/test1.txt"
-  input <- lines <$> readFile "input/input1.txt"
+  input <- lines <$> (getDataDir >>= readFile . (++ "/input/input1.txt"))
   let a = sum $ map (f digitsA) input
       b = sum $ map (f (digitsA ++ digitsB)) input
   putStrLn

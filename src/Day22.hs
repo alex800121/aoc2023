@@ -5,12 +5,13 @@ import Control.Monad.Trans.State (State, evalState, get)
 import Data.Bifunctor (Bifunctor (..))
 import Data.List (partition)
 import Data.Map (Map)
-import qualified Data.Map as Map
+import Data.Map qualified as Map
 import Data.Maybe (isJust, mapMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
+import Data.Set qualified as Set
 import Debug.Trace (traceShow)
 import MyLib
+import Paths_AOC2023
 import Text.Megaparsec (parseMaybe, parseTest, sepBy)
 import Text.Megaparsec.Char
 
@@ -88,7 +89,7 @@ disintegrate g = f Set.empty g . Set.singleton
 day22 :: IO ()
 day22 = do
   -- input <- lines <$> readFile "input/test22.txt"
-  input <- lines <$> readFile "input/input22.txt"
+  input <- lines <$> (getDataDir >>= readFile . (++ "/input/input22.txt"))
   let initG = G Map.empty Map.empty (Set.fromList (mapMaybe (parseMaybe parseBlock) input))
       g = runG 0 initG
       (day22a, day22b) = partition (removable g) (Map.keys (_support g))

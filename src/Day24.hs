@@ -2,9 +2,10 @@ module Day24 where
 
 import Data.Either (fromRight)
 import Data.Matrix
-import qualified Data.Matrix as Matrix
+import Data.Matrix qualified as Matrix
 import Data.Maybe (isJust, mapMaybe)
 import MyLib
+import Paths_AOC2023
 import Text.Megaparsec
 import Text.Megaparsec.Char
 
@@ -55,7 +56,7 @@ day24b hs = invM * n
 
 day24 :: IO ()
 day24 = do
-  input <- lines <$> readFile "input/input24.txt"
+  input <- lines <$> (getDataDir >>= readFile . (++ "/input/input24.txt"))
   -- input <- lines <$> readFile "input/test24.txt"
   let hails = mapMaybe (parseMaybe (parseInput @Rational)) input
       minA = 200000000000000
