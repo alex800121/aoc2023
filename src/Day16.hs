@@ -2,18 +2,74 @@
 
 module Day16 where
 
-import Paths_AOC2023
-import Data.Array.Unboxed (UArray, Ix (..), bounds, (!))
-import qualified Data.Array as A
-import Data.Bifunctor (Bifunctor (bimap))
+import Control.Monad ((<=<))
+import Data.Array.IArray qualified as A
+import Data.Array.Unboxed (Ix (..), UArray, bounds, (!))
+import Data.Bifunctor (Bifunctor (..))
+import Data.IntMap.Strict (IntMap)
+import Data.IntMap.Strict qualified as IM
+import Data.Map.Strict qualified as Map
+import Data.Maybe (mapMaybe)
 import Data.Set (Set)
-import qualified Data.Set as Set
-import MyLib (Direction (..), drawArray)
+import Data.Set qualified as Set
 import Debug.Trace (traceShow)
+import MyLib (Direction (..), drawArray, drawGraph, toIndex)
+import Paths_AOC2023
 
 type Index = (Int, Int)
 
 type Beam = (Index, Direction)
+
+type XYMap = (IntMap (IntMap Char), IntMap (IntMap Char))
+
+buildXYMap m = (b, (xmap, ymap))
+  where
+    b = A.bounds m
+    xmap =
+      IM.fromListWith
+        (<>)
+        [ (x, IM.singleton y c)
+          | ((x, y), c) <- A.assocs m,
+            c `notElem` ".|"
+        ]
+    ymap =
+      IM.fromListWith
+        (<>)
+        [ (y, IM.singleton x c)
+          | ((x, y), c) <- A.assocs m,
+            c `notElem` ".-"
+        ]
+
+skipWalk :: (Index, Index) -> XYMap -> Beam -> Set Index
+skipWalk b xymap x = go Set.empty Set.empty [x]
+  where
+    go acc tra [] = acc
+    go acc tra (x : ss)
+      | x `Set.member` tra || not (inRange b (fst x)) =
+          go acc tra ss
+      | (i, d) <- x,
+        (g, []) <- skipStep b xymap x,
+        y <- (g, d) =
+          go (toIndices i g <> acc) (Set.insert y $ Set.insert x tra) ss
+      | (i, d) <- x,
+        (f, ds) <- skipStep b xymap x,
+        y <- (f, d),
+        ss' <-
+          [ (bimap (+ fst f) (+ snd f) (toIndex d'), d')
+            | d' <- ds
+          ] =
+          go (toIndices i f <> acc) (Set.insert y $ Set.insert x tra) (ss' <> ss)
+    toIndices (x0, y0) (x1, y1) = Set.fromList [(x, y) | x <- [min x0 x1 .. max x0 x1], y <- [min y0 y1 .. max y0 y1]]
+
+-- skipStep :: (Index, Index) -> XYMap -> Beam -> [Beam]
+skipStep b@((minx, miny), (maxx, maxy)) (xmap, ymap) (i@(x, y), d) =
+  maybe (g, []) (bimap h (`reflect` d) . fst) f
+  where
+    (g, h, f) = case d of
+      North -> ((x, miny), (x,), IM.maxViewWithKey . IM.filterWithKey (\k _ -> k <= y) =<< (xmap IM.!? x))
+      South -> ((x, maxy), (x,), IM.minViewWithKey . IM.filterWithKey (\k _ -> k >= y) =<< (xmap IM.!? x))
+      West -> ((minx, y), (,y), IM.maxViewWithKey . IM.filterWithKey (\k _ -> k <= x) =<< (ymap IM.!? y))
+      East -> ((maxx, y), (,y), IM.minViewWithKey . IM.filterWithKey (\k _ -> k >= x) =<< (ymap IM.!? y))
 
 reflect :: Char -> Direction -> [Direction]
 reflect '\\' d = if odd (fromEnum d) then [succ d] else [pred d]
@@ -22,54 +78,24 @@ reflect '|' d = if odd (fromEnum d) then [pred d, succ d] else [d]
 reflect '-' d = if odd (fromEnum d) then [d] else [succ d, pred d]
 reflect _ d = [d]
 
-toIndex :: Direction -> Index
-toIndex North = (0, -1)
-toIndex South = (0, 1)
-toIndex West = (-1, 0)
-toIndex East = (1, 0)
-
-calc :: UArray Index Char -> Set Beam -> Set Beam -> Set Beam
-calc a visited s
-  | Set.null s' = visited
-  | otherwise = calc a visited' (Set.unions (Set.map (calcSingle a) s'))
+start m =
+  [((x, y), d) | y <- [miny .. maxy], (x, d) <- [(minx, East), (maxx, West)]]
+    <> [((x, y), d) | x <- [minx .. maxx], (y, d) <- [(miny, South), (maxy, North)]]
   where
-    b = bounds a
-    s' = Set.filter (inRange b . fst) s Set.\\ visited
-    visited' = Set.union visited s'
-
-calcSingle :: UArray Index Char -> Beam -> Set Beam
-calcSingle a (i, d)
-  | inRange b i = Set.fromList i'
-  | otherwise = Set.empty
-  where
-    b = bounds a
-    d' = reflect (a ! i) d
-    i' = map ((,) <$> (bimap (+ fst i) (+ snd i) . toIndex) <*> id) d'
-
-
-day16b :: UArray Index Char -> Int
-day16b a = maximum $ map (length . Set.map fst . calc a Set.empty . Set.singleton) edges
-  where
-    ((minX, minY), (maxX, maxY)) = bounds a
-    edges =
-      [((minX, y), East) | y <- [minY .. maxY]]
-        ++ [((maxX, y), West) | y <- [minY .. maxY]]
-        ++ [((x, minY), South) | x <- [minX .. maxX]]
-        ++ [((x, maxY), North) | x <- [minX .. maxX]]
+    ((minx, miny), (maxx, maxy)) = A.bounds m
 
 day16 :: IO ()
 day16 = do
-  input <- drawArray @UArray . lines <$>(getDataDir >>= readFile . (++ "/input/input16.txt")) 
-  -- input <- drawArray @Array . lines <$> readFile "input/test16.txt"
+  input <- drawArray @UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input16.txt"))
+  -- input <- drawArray @UArray . lines <$> (getDataDir >>= readFile . (++ "/input/test16.txt"))
+  let (b, xymap) = buildXYMap input
   putStrLn
     . ("day16a: " ++)
     . show
     . length
-    . Set.map fst
-    . calc input Set.empty
-    $ Set.singleton ((0, 0), East)
+    $ skipWalk b xymap ((0, 0), East)
   putStrLn
     . ("day16b: " ++)
     . show
-    $ day16b input
-  -- print $ range (West, South)
+    . maximum
+    $ map (length . skipWalk b xymap) (start input)
