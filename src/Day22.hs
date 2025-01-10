@@ -1,106 +1,96 @@
+{-# LANGUAGE MultiWayIf #-}
+
 module Day22 where
 
-import Control.Monad (foldM)
-import Control.Monad.Trans.State (State, evalState, get)
+import Data.Array.IArray qualified as A
 import Data.Bifunctor (Bifunctor (..))
-import Data.List (partition)
-import Data.Map (Map)
-import Data.Map qualified as Map
-import Data.Maybe (isJust, mapMaybe)
+import Data.Function (on)
+import Data.Graph
+import Data.IntMap.Strict (IntMap)
+import Data.IntMap.Strict qualified as IM
+import Data.IntSet (IntSet)
+import Data.IntSet qualified as IS
+import Data.List (foldl', sortBy)
+import Data.Map.Strict (Map)
+import Data.Map.Strict qualified as Map
+import Data.Maybe (mapMaybe)
 import Data.Set (Set)
 import Data.Set qualified as Set
+import Data.Tree (drawForest)
 import Debug.Trace (traceShow)
-import MyLib
+import MyLib (Parser, signedInteger)
 import Paths_AOC2023
 import Text.Megaparsec (parseMaybe, parseTest, sepBy)
 import Text.Megaparsec.Char
 
-type Brick = Vec (S (S (S Z))) (Int, Int)
+type FloatBrick = [(Int, (Int, (Int, Set Index)))] -- (Key, (Z, (H, XY)))
 
-data GameState = G
-  { _support :: Map Brick (Set Brick),
-    _depend :: Map Brick (Set Brick),
-    _free :: Set Brick
-  }
-  deriving (Show, Eq, Ord)
+type SettleBrick = Map Index (Int, Int) -- Map (x, y) (Z, Key)
 
-parseBlock :: Parser Brick
-parseBlock = do
-  a <- sepBy signedInteger (char ',')
+type Support = IntMap [Int]
+
+type Index = (Int, Int)
+
+brickParser :: Parser (Int, (Int, Set Index))
+brickParser = do
+  xs <- sepBy signedInteger (char ',')
   char '~'
-  b <- sepBy signedInteger (char ',')
-  return $ toVec (SS (SS (SS SZ))) $ reverse $ map (second (+ 1)) $ zipWith (\x y -> (min x y, max x y)) a b
+  ys <- sepBy signedInteger (char ',')
+  let [(x0, x1), (y0, y1), (z0, z1)] = zipWith (\a b -> (min a b, max a b)) xs ys
+  return (z0, (z1 - z0 + 1, Set.fromList [(x, y) | x <- [x0 .. x1], y <- [y0 .. y1]]))
 
-runG :: Int -> GameState -> GameState
-runG floor g = case Set.minView (_free g) of
-  Nothing -> g
-  -- Just (x, xs) | traceShow (length (_free g), length (_support g)) True -> runG floor (dropFree floor x (g {_free = xs}))
-  Just (x, xs) -> runG floor (dropFree floor x (g {_free = xs}))
-
-dropFree :: Int -> Brick -> GameState -> GameState
-dropFree floor b g
-  | fst (vRead b' 0) <= floor =
-      g
-        { _support = support,
-          _depend = Map.insert b (Set.singleton $ pure (0, 0)) $ _depend g
-        }
-  | not $ Set.null depend =
-      g'
-        { _support =
-            Set.foldl'
-              ( \acc x ->
-                  Map.insertWith
-                    Set.union
-                    x
-                    (Set.singleton b)
-                    acc
-              )
-              support
-              depend
-        }
-  | otherwise = dropFree floor b' g
+floatToSettle :: FloatBrick -> (SettleBrick, Support)
+floatToSettle = go Map.empty IM.empty
   where
-    b' = vModify b 0 (bimap (subtract 1) (subtract 1))
-    depend = Set.filter (isJust . overlapEucVec b') (Map.keysSet $ _support g)
-    support = Map.insert b Set.empty (_support g)
-    g' = g {_depend = Map.insert b depend (_depend g)}
-
-removable :: GameState -> Brick -> Bool
-removable g b = all ((> 1) . length . (_depend g Map.!)) (_support g Map.! b)
-
-disintegrate :: GameState -> Brick -> Set Brick
-disintegrate g = f Set.empty g . Set.singleton
-  where
-    f acc gs bs
-      | Set.null bs = acc
-      | otherwise = f acc' gs' bs'
+    go :: SettleBrick -> Support -> FloatBrick -> (SettleBrick, Support)
+    go settle support [] = (settle, support)
+    go settle support ((k, (_, (h, xy))) : floating') = go settle' support' floating'
       where
-        (bs', depend') =
-          first Map.keysSet
-            . Map.mapEither
-              ( \x ->
-                  let x' = x Set.\\ bs
-                   in if Set.null x' then Left x' else Right x'
-              )
-            $ _depend gs
-        gs' = gs {_depend = depend'}
-        acc' = Set.union acc bs'
+        settle' = Map.union (Map.fromSet (const (z' + h, k)) xy) settle
+        support' = IM.insert k [] $ foldl' (\acc e -> IM.insertWith (<>) e [k] acc) support s'
+        (z', s') = Set.foldl' g (0, []) xy
+          where
+            g (z, s) xy
+              | Just (z', k') <- settle Map.!? xy =
+                  if
+                    | z' > z -> (z', [k'])
+                    | z' == z -> (z, k' : s)
+                    | z' < z -> (z, s)
+              | otherwise = (z, s)
+
+calcFall support = map (\x -> Set.size (go Set.empty (Set.singleton x)) - 1) [l .. h]
+  where
+    depend = transposeG support
+    (l, h) = A.bounds support
+    go acc xs
+      | Set.null xs = acc
+      | otherwise = go acc' xs'
+      where
+        ds x = Set.fromList $ filter (\s -> all (`Set.member` acc') (depend A.! s)) $ support A.! x
+        acc' = Set.union xs acc
+        xs' = Set.unions $ Set.map ds xs
 
 day22 :: IO ()
 day22 = do
-  -- input <- lines <$> readFile "input/test22.txt"
-  input <- lines <$> (getDataDir >>= readFile . (++ "/input/input22.txt"))
-  let initG = G Map.empty Map.empty (Set.fromList (mapMaybe (parseMaybe parseBlock) input))
-      g = runG 0 initG
-      (day22a, day22b) = partition (removable g) (Map.keys (_support g))
+  (g, vToN, nToV) <-
+    graphFromEdges
+      . map (\(x, y) -> (x, x, y))
+      . IM.toList
+      . snd
+      . floatToSettle
+      . zip [0 ..]
+      . sortBy (compare `on` fst)
+      . mapMaybe (parseMaybe brickParser)
+      . lines
+      <$> (getDataDir >>= readFile . (++ "/input/input22.txt"))
+  -- <$> (getDataDir >>= readFile . (++ "/input/test22.txt"))
+  let ans = calcFall g
   putStrLn
     . ("day22a: " ++)
     . show
-    $ length day22a
+    . length
+    $ filter (== 0) ans
   putStrLn
     . ("day22b: " ++)
     . show
-    . sum
-    $ map (length . disintegrate g) day22b
-
--- print $ sum n
+    $ sum ans

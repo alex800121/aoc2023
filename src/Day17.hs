@@ -1,66 +1,98 @@
+{-# LANGUAGE MultiWayIf #-}
+
 module Day17 where
 
-import Data.Array.Unboxed qualified as U
+import Control.Monad.ST (ST, runST)
+import Data.Array.IArray qualified as A
+import Data.Array.Unboxed (Array)
+-- import Data.Array.MArray qualified as M
+-- import Data.Array.ST
+-- import Data.IntSet (IntSet)
+-- import Data.IntSet qualified as IS
+-- import Data.IntMap (IntMap)
+-- import Data.IntMap qualified as IM
+-- import Data.Set (Set)
+-- import Data.Set qualified as Set
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (digitToInt)
 import Data.PQueue.Prio.Min qualified as Q
-import Data.Set (Set)
-import Data.Set qualified as Set
-import MyLib
+import Data.Vector.Unboxed.Mutable (STVector)
+import Data.Vector.Unboxed.Mutable qualified as V
+import MyLib (Direction (..), drawArray, toIndex)
 import Paths_AOC2023
-
-data GameState = G
-  { _location :: Index,
-    _direction :: Direction,
-    _moves :: Int
-  }
-  deriving (Show, Ord, Eq)
+import Data.Maybe (fromMaybe)
+import Control.Monad ((>=>))
 
 type Index = (Int, Int)
 
-type Q = Q.MinPQueue Int GameState
+type Q = Q.MinPQueue Int (Index, Direction)
 
-type M = U.UArray Index Int
+type M = Array Index Int
 
-dijkstra :: Int -> Int -> M -> Index -> Set GameState -> Q -> Maybe Int
-dijkstra minRun maxRun m end visited q = case q of
-  Q.Empty -> Nothing
-  (k, g) Q.:< _ | _location g == end && _moves g >= minRun && _moves g <= maxRun -> Just k
-  (_, g) Q.:< xs | g `Set.member` visited -> dijkstra minRun maxRun m end visited xs
-  (k, g@(G location direction moves)) Q.:< xs ->
-    let visited' = Set.insert g visited
-        added =
-          Q.fromList $
-            [ (k', G l' d' m')
-              | moves >= minRun,
-                let m' = 1,
-                d' <- map ($ direction) [succ, pred],
-                let l' = bimap (+ fst location) (+ snd location) $ toIndex d',
-                U.inRange b l',
-                let k' = k + m U.! l'
-            ]
-              ++ [ (k', G l' direction m')
-                   | let m' = moves + 1,
-                     m' <= maxRun,
-                     let l' = bimap (+ fst location) (+ snd location) $ toIndex direction,
-                     U.inRange b l',
-                     let k' = k + m U.! l'
-                 ]
-        xs' = Q.union xs added
-     in dijkstra minRun maxRun m end visited' xs'
+-- dijkstra minRun maxRun m end start = go (IM.fromList (map ((,0) . uncurry toInt) starts)) (Q.fromList (map (0,) starts) )
+--   where
+--     toInt (x, y) d = x * maxy * 2 + y * 2 + (fromEnum d `mod` 2)
+--     !maxy = snd end + 1
+--     starts = [(start, d) | d <- [South, East]]
+--     go travelled Q.Empty = Nothing
+--     go travelled ((len, g@(s, d)) Q.:< qs)
+--       | s == end = Just len
+--       | otherwise = go travelled' qs'
+--       where
+--         g = toInt s d
+--         (travelled', qs') = f minRun maxRun 0 len (pred d) s $ f minRun maxRun 0 len (succ d) s (travelled, qs)
+--         f min max run n d i@(x, y) (t, q)
+--           | run' > max || not (A.inRange (start, end) i') = (t, q)
+--           | Just n' <- m A.!? i',
+--             n'' <- n + n',
+--             b <- fromMaybe maxBound (t IM.!? e) =
+--               if run' < min || b <= n'' then f min max run' n'' d i' (t, q) else 
+--                 f min max run' n'' d i' (IM.insert e n'' t, Q.insert n'' (i', d) q)
+--           where
+--             !i' = bimap (+ x) (+ y) (toIndex d)
+--             !run' = succ run
+--             e = toInt i' d
+
+dijkstra minRun maxRun m end start = runST $ do
+  v <- V.replicate (toInt end maxBound + 1) maxBound
+  mapM_ (\x -> V.write v (uncurry toInt x) 0) starts
+  go v (Q.fromList (map (0,) starts))
   where
-    b = U.bounds m
+    starts = [(start, d) | d <- [South, East]]
+    toInt (x, y) d = x * maxy * 2 + y * 2 + (fromEnum d `mod` 2)
+    !maxy = snd end + 1
+    go :: STVector s Int -> Q.MinPQueue Int (Index, Direction) -> ST s (Maybe Int)
+    go travelled Q.Empty = pure Nothing
+    go travelled ((len, g@(s, d)) Q.:< qs)
+      | s == end = pure $ Just len
+      | otherwise = (f minRun maxRun 0 len (succ d) s >=> f minRun maxRun 0 len (pred d) s >=> go travelled) qs
+      where
+        f min max run n d i@(x, y) q
+          | run' > max || not (A.inRange (start, end) i') = pure q
+          | Just n' <- m A.!? i',
+            n'' <- n + n' = do
+              b <- V.read travelled e'
+              if run' < min || b <= n''
+                then f min max run' n'' d i' q
+                else
+                  V.write travelled e' n''
+                    >> f min max run' n'' d i' (Q.insert n'' (i', d) q)
+          where
+            !i' = bimap (+ x) (+ y) (toIndex d)
+            !run' = succ run
+            e' = toInt i' d
+
+manhattan (a, b) (c, d) = abs (a - c) + abs (b - d)
 
 day17 :: IO ()
 day17 = do
-  -- input <- U.amap digitToInt . drawArray @U.UArray . lines <$> readFile "input/test17a.txt"
-  -- input <- U.amap digitToInt . drawArray @U.UArray . lines <$> readFile "input/test17.txt"
-  input <- U.amap digitToInt . drawArray @U.UArray . lines <$> (getDataDir >>= readFile . (++ "/input/input17.txt"))
+  input <- A.amap digitToInt . drawArray @Array . lines <$> (getDataDir >>= readFile . (++ "/input/input17.txt"))
+  let (start, end) = A.bounds input
   putStrLn
     . ("day17a: " ++)
     . show
-    $ dijkstra 0 3 input (snd $ U.bounds input) Set.empty (Q.singleton 0 (G (0, 0) East 0))
+    $ dijkstra 1 3 input end start
   putStrLn
     . ("day17b: " ++)
     . show
-    $ dijkstra 4 10 input (snd $ U.bounds input) Set.empty (Q.fromList [(0, G (0, 0) East 0), (0, G (0, 0) South 0)])
+    $ dijkstra 4 10 input end start
