@@ -3,20 +3,13 @@ module Day23 where
 import Data.Array.IArray qualified as A
 import Data.Array.Unboxed (Array)
 import Data.Bifunctor (Bifunctor (..))
-import Data.Bits (Bits (..))
 import Data.Function (on)
 import Data.Graph (graphFromEdges)
 import Data.IntMap.Strict (IntMap)
 import Data.IntMap.Strict qualified as IM
-import Data.IntSet (IntSet)
-import Data.IntSet qualified as IS
 import Data.List (foldl', maximumBy, sortBy)
-import Data.Map.Strict qualified as Map
-import Data.Maybe (maybe, maybeToList)
-import Data.PQueue.Prio.Max qualified as Q
 import Data.Semigroup (Max (..))
 import Data.Set qualified as Set
-import Debug.Trace (traceShow)
 import MyLib (Direction (..), drawArray, toIndex)
 import Paths_AOC2023
 
@@ -72,22 +65,19 @@ readInput s = (a', nv IM.! start1, nv IM.! toInt lenY end1, startn1 + endn1)
 
 walk d (x, y) = bimap (+ x) (+ y) (toIndex d)
 
-solve m s0 end = go mempty [(s0, notTravelled, Max 0)]
+solve m s0 end = go mempty (s0, notTravelled, Max 0)
   where
     notTravelled = IM.unionsWith (<>) $ map IM.fromList $ A.elems m
-    go nMax [] = nMax
-    go nMax ((s, nt, n) : xs)
-      | s == end = go (nMax <> n) xs
-      | nMax > n + sum nt = go nMax xs
-      | otherwise = go nMax xs'
+    go nMax (s, nt, n)
+      | s == end = nMax <> n
+      | nMax > n + sum nt = nMax
+      | otherwise = foldl' go nMax choices
       where
-        xs' = foldr g xs (m A.! s)
-        g (s', n') accX
-          | s' `IM.notMember` nt = accX
-          | otherwise = (s', IM.delete s' nt, n'') : accX
-          where
-            n'' = n + n'
-
+        choices =
+          [ (s', IM.delete s' nt, n + n')
+            | (s', n') <- m A.! s,
+              s' `IM.member` nt
+          ]
 buildGraph m = graphFromEdges [(i, i, map fst (m IM.! i)) | i <- IM.keys m]
 
 expand s0 m = go Set.empty m' [s0]
@@ -115,7 +105,6 @@ expand s0 m = go Set.empty m' [s0]
 day23 :: IO ()
 day23 = do
   (m, start, end, n) <- readInput <$> (getDataDir >>= readFile . (++ "/input/input23.txt"))
-  -- (m, start, end, n) <- readInput <$> (getDataDir >>= readFile . (++ "/input/test23.txt"))
   let m' = expand start m
   putStrLn
     . ("day23a: " ++)
