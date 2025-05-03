@@ -9,7 +9,7 @@ import Data.Bifunctor (Bifunctor (..))
 import Data.Function (on)
 import Data.HashMap.Strict qualified as H
 import Data.Hashable (Hashable)
-import Data.List (find, findIndex, findIndices, foldl1', (\\))
+import Data.List (delete, find, findIndex, findIndices, foldl1', (\\))
 import Data.Maybe (fromMaybe, mapMaybe)
 import Debug.Trace
 import GHC.Generics (Generic)
@@ -91,13 +91,13 @@ parseConj = do
 parseModules :: Parser GameState
 parseModules = choice [parseBroadcaster, parseFlip, parseConj]
 
-pushButton :: [String] -> (GameState, ((Int, [(String, Int)]), (Int, Int))) -> (GameState, ((Int, [(String, Int)]), (Int, Int)))
-pushButton targets gs@(g', ((i, t), (low, high))) = second (first (first (+ 1))) $ f [("broadcaster", ("button", Low))] gs
+pushButton :: (GameState, ((Int, ([String], Int)), (Int, Int))) -> (GameState, ((Int, ([String], Int)), (Int, Int)))
+pushButton gs@(!g', ((!i, (!targets, !t)), (!low, !high))) = second (first (first (+ 1))) $ f [("broadcaster", ("button", Low))] gs
   where
     f [] g = g
-    f ((to, (from, sig)) : xs) (g, acc) = f xs' (g', acc')
+    f ((!to, (!from, !sig)) : xs) (!g, !acc) = f xs' (g', acc')
       where
-        acc' = bimap (if to `elem` targets && sig then second ((to, i + 1) :) else id) (if sig then first (+ 1) else second (+ 1)) acc
+        acc' = bimap (if to `elem` targets && sig then second (bimap (delete to) (lcm (i + 1))) else id) (if sig then first (+ 1) else second (+ 1)) acc
         (module', nextSig) = sendSignal (from, sig) $ fromMaybe (Output []) (g H.!? to)
         xs' = xs <> map (\(a, b) -> (a, (to, b))) nextSig
         g' = H.insert to module' g
@@ -118,7 +118,7 @@ day20 = do
   -- input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> readFile "input/test20.txt"
   input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
   let targets = ["js", "zb", "rr", "bs"]
-      l = iterate (pushButton targets) (input, ((0, []), (0, 0)))
+      l = iterate pushButton (input, ((0, (targets, 1)), (0, 0)))
   putStrLn
     . ("day20a: " ++)
     . show
@@ -126,10 +126,8 @@ day20 = do
     . snd
     . snd
     $ l !! 1000
-  -- print $ firstRepeatBy ((==) `on` fst) l
   putStrLn
     . ("day20b: " ++)
     . show
-    . foldl1' lcm
-    . maybe [] (map snd)
-    $ find (null . (targets \\) . map fst) (map (snd . fst . snd) l)
+    . fmap snd
+    $ find (null . fst) (map (snd . fst . snd) l)
