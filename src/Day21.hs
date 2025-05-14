@@ -1,8 +1,6 @@
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE TupleSections #-}
-
 module Day21 where
 
+import Control.Parallel.Strategies
 import Data.Array.Unboxed qualified as U
 import Data.Bifunctor (Bifunctor (..))
 import Data.Char (intToDigit)
@@ -20,9 +18,9 @@ type M = U.UArray Index Char
 type Index = (Int, Int)
 
 bfs :: U.UArray Index Char -> Map Index Int -> Map Index Int -> Map Index Int
-bfs m start acc
+bfs m acc start
   | Map.null start = acc
-  | otherwise = bfs m start' acc'
+  | otherwise = bfs m acc' start'
   where
     b = U.bounds m
     acc' = Map.union acc start
@@ -124,12 +122,12 @@ day21 = do
             y <- [minY, maxY]
         ]
       sideStarts = [(fst start, minY), (fst start, maxY), (minX, snd start), (maxX, snd start)]
-      cornerBFS = map (\start -> bfs input (Map.singleton start 0) Map.empty) cornerStarts
-      sideBFS = map (\start -> bfs input (Map.singleton start 0) Map.empty) sideStarts
+      -- cornerBFS = parMap rpar () cornerStarts
+      -- sideBFS = parMap rpar sideStarts
       target = 26501365
-      cornerN = map (calcCorner target (fst start + 1) (maxX - minX + 1)) cornerBFS
-      sideN = map (calcSide target (fst start + 1) (maxX - minX + 1)) sideBFS
-      day21a = bfs input (Map.singleton start 0) Map.empty
+      cornerN = parMap rpar (calcCorner target (fst start + 1) (maxX - minX + 1) . bfs input Map.empty . (`Map.singleton` 0)) cornerStarts
+      sideN = parMap rpar (calcSide target (fst start + 1) (maxX - minX + 1) . bfs input Map.empty . (`Map.singleton` 0)) sideStarts
+      day21a = bfs input Map.empty (Map.singleton start 0)
   putStrLn
     . ("day21a: " ++)
     . show

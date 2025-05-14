@@ -1,12 +1,13 @@
 module Day12 where
 
 import Paths_AOC2023
-import Control.Monad.Trans.State.Strict (State, evalState, get, modify, modify')
-import qualified Data.Array as A
+import Data.Array.IArray qualified as A
+import Data.Array.Unboxed (Array)
 import Data.Bifunctor (Bifunctor (..))
 import Data.Bits (Bits (..))
 import Data.List (inits, intercalate, tails, transpose, uncons)
 import Data.List.Split (splitOn)
+import Control.Parallel.Strategies
 import Debug.Trace (traceShow)
 
 inputParser :: String -> (String, [Int])
@@ -24,7 +25,7 @@ calc x y = calc' x y
     ly = length y
     calc' a b = cache A.! (lx - length a, ly - length b)
     cache =
-      A.array
+      A.array @Array
         ((0, 0), (length x, length y))
         [ ((a, b), n)
           | a <- [0 .. lx],
@@ -50,9 +51,9 @@ day12 = do
     . ("day12a: " ++)
     . show
     . sum
-    $ map (uncurry calc) input
+    $ parMap rpar (uncurry calc) input
   putStrLn
     . ("day12b: " ++)
     . show
     . sum
-    $ map (\(x, y) -> calc (intercalate "?" $ replicate 5 x) (concat $ replicate 5 y)) input
+    $ parMap rpar (\(x, y) -> calc (intercalate "?" $ replicate 5 x) (concat $ replicate 5 y)) input

@@ -3,60 +3,74 @@
 module Day25 where
 
 import Data.Bifunctor (Bifunctor (..))
-import Data.List (group, sort)
+import Data.List (foldl', find, unfoldr)
 import Data.List.Split (splitOn)
-import Data.Map (Map)
-import Data.Map qualified as Map
+import Data.Map.Strict (Map)
+import Data.Map.Strict qualified as Map
+import Data.Maybe (fromMaybe, isJust)
 import Data.MultiSet (MultiSet)
 import Data.MultiSet qualified as MS
 import Data.Set (Set)
 import Data.Set qualified as Set
+import Debug.Trace (traceShow)
 import Paths_AOC2023
 import System.Random
+import Control.Monad (join)
+import Control.Parallel.Strategies
 
-type G = Map (Set String) (MultiSet String)
+-- type G = Map (Set String) (MultiSet String)
+type G = Map (Int, Int) (MultiSet (Int, Int))
 
 readInput :: String -> G
-readInput s = s'
+readInput s =
+  Map.fromList
+    . map (bimap ((,1) . (allPoints Map.!)) (MS.fromList . map ((,1) . (allPoints Map.!)) . Set.toList))
+    $ Map.toList s'
   where
     s' =
       Map.unionsWith (<>)
         . map f
         $ lines s
-    f x = Map.fromList $ map ((,MS.singleton a) . Set.singleton) bs ++ [(Set.singleton a, MS.fromList bs)]
+    f x = Map.fromList $ (a, Set.fromList bs) : map (,Set.singleton a) bs
       where
         [a, b] = splitOn ": " x
         bs = words b
+    allPoints =
+      Map.fromList
+        . (`zip` [0 ..])
+        . Set.toList
+        $ Map.foldlWithKey' (\acc k xs -> Set.singleton k <> xs <> acc) Set.empty s'
 
-contraction :: Int -> G -> G
-contraction a g
-  | 3 >= MS.size (head (Map.elems f')) = f'
-  | otherwise = contraction (a + 1) g
+contract :: (RandomGen seed) => seed -> G -> Maybe Int
+contract seed0 !g0
+  | s0 > 2 = contract seed1 gNew
+  | l <= 3 = Just $ snd k0 * snd k1
+  | otherwise = Nothing
   where
-    f' = f g seed
-    s = Map.size g
-    seed = mkStdGen a
-    f g seed
-      | Map.size g <= 2 = g
-      | otherwise = f g1'' seed'
-      where
-        s = Map.size g
-        (n, seed') = first (`mod` s) $ random @Int seed
-        ((g0k, g0a), g1) = (Map.elemAt n g, Map.deleteAt n g)
-        kList = MS.distinctElems g0a
-        k1 = kList !! (n `mod` length kList)
-        ((g0k', g0a'), g1') = first Map.findMin $ Map.partitionWithKey (\k _ -> k1 `Set.member` k) g1
-        g0k'' = g0k <> g0k'
-        g1'' = Map.insert g0k'' (MS.filter (`Set.notMember` g0k'') $ MS.union g0a g0a') g1'
+    s0 = Map.size g0
+    (n, seed1) = random @Int seed0
+    n0 = n `mod` s0
+    (k0, c0) = Map.elemAt n0 g0
+    k1 = MS.findMin c0
+    l = MS.occur k1 c0
+    c1 = g0 Map.! k1
+    kNew = second (+ snd k1) k0
+    cNew = MS.union (MS.deleteAll k1 c0) (MS.deleteAll k0 c1)
+    gNew' = Map.insert kNew cNew $ Map.delete k1 $ Map.delete k0 g0
+    gNew = foldl' f gNew' (MS.distinctElems cNew)
+    f acc kc = Map.adjust (MS.insertMany kNew (MS.occur kc (gNew' Map.! kNew)) . MS.deleteAll k0 . MS.deleteAll k1) kc acc
+
+solve !i !g = fromMaybe (solve i' g) (contract i g)
+  where
+    i' = snd $ genWord8 i
 
 day25 :: IO ()
 day25 = do
   m <- readInput <$> (getDataDir >>= readFile . (++ "/input/input25.txt"))
-  -- m <- readInput <$> readFile "input/test25.txt"
   putStrLn
     . ("day25a: " ++)
     . show
-    . product
-    . map length
-    . Map.keys
-    $ contraction 0 m
+    . join
+    . find isJust
+    . map (`contract` m)
+    $ unfoldr (\x -> let (_, g) = genWord8 x in Just (g, g)) (mkStdGen 0)
