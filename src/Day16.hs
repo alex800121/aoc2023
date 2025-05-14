@@ -15,6 +15,7 @@ import Data.Set qualified as Set
 import Debug.Trace (traceShow)
 import MyLib (Direction (..), drawArray, drawGraph, toIndex)
 import Paths_AOC2023
+import Data.List (foldl')
 
 type Index = (Int, Int)
 
@@ -41,16 +42,14 @@ buildXYMap m = (b, (xmap, ymap))
         ]
 
 skipWalk :: (Index, Index) -> XYMap -> Beam -> Set Index
-skipWalk b xymap x = go Set.empty Set.empty [x]
+skipWalk b xymap x = fst $ go Set.empty Set.empty x
   where
-    go acc tra [] = acc
-    go acc tra (x : ss)
-      | x `Set.member` tra || not (inRange b (fst x)) =
-          go acc tra ss
+    go acc tra x
+      | x `Set.member` tra || not (inRange b (fst x)) = (acc, tra)
       | (i, d) <- x,
         (g, []) <- skipStep b xymap x,
         y <- (g, d) =
-          go (toIndices i g <> acc) (Set.insert y $ Set.insert x tra) ss
+          (toIndices i g <> acc, Set.insert y $ Set.insert x tra)
       | (i, d) <- x,
         (f, ds) <- skipStep b xymap x,
         y <- (f, d),
@@ -58,7 +57,7 @@ skipWalk b xymap x = go Set.empty Set.empty [x]
           [ (bimap (+ fst f) (+ snd f) (toIndex d'), d')
             | d' <- ds
           ] =
-          go (toIndices i f <> acc) (Set.insert y $ Set.insert x tra) (ss' <> ss)
+          foldl' (uncurry go) (toIndices i f <> acc, Set.insert y $ Set.insert x tra) ss'
     toIndices (x0, y0) (x1, y1) = Set.fromList [(x, y) | x <- [min x0 x1 .. max x0 x1], y <- [min y0 y1 .. max y0 y1]]
 
 -- skipStep :: (Index, Index) -> XYMap -> Beam -> [Beam]
