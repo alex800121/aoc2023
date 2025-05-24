@@ -7,9 +7,7 @@ import Control.Monad (foldM, when)
 import Control.Monad.ST.Strict (ST, runST)
 import Data.Bits (Bits (..))
 import Data.Char (isAlpha)
-import Data.IntSet (IntSet)
-import Data.IntSet qualified as IS
-import Data.List (partition, sort)
+import Data.List (partition, sort, foldl')
 import Data.Map.Strict qualified as Map
 import Data.Maybe (fromMaybe, mapMaybe)
 import Data.Vector.Strict qualified as SV
@@ -65,18 +63,18 @@ solveA ffLen ref v = runST $ do
     f mv Q.Empty = pure ()
     f mv (Q.Full s ss) = f mv . (ss <>) =<< sendSignal s ffLen ref mv
 
-solveB :: Int -> SV.Vector (EphemeralQueue Int) -> Vector State -> IntSet -> Int
+solveB :: Int -> SV.Vector (EphemeralQueue Int) -> Vector State -> Word -> Int
 solveB ffLen ref v iTargets = runST $ do
   mv <- V.thaw v
   f 1 1 iTargets mv button
   where
     button = Q.singleton (0, 0, Low)
-    f :: Int -> Int -> IntSet -> STVector s State -> EphemeralQueue Signal -> ST s Int
+    f :: Int -> Int -> Word -> STVector s State -> EphemeralQueue Signal -> ST s Int
     f i acc t mv q
-      | IS.null t = pure acc
+      | 0 == t = pure acc
       | Q.Empty <- q = f (succ i) acc t mv button
       | Q.Full s@(origin, to, sig) ss <- q,
-        (acc', t') <- if origin `IS.member` t && not sig then (lcm acc i, IS.delete origin t) else (acc, t) =
+        (acc', t') <- if t `testBit` origin && not sig then (lcm acc i, t `clearBit` origin) else (acc, t) =
           f i acc' t' mv . (ss <>) =<< sendSignal s ffLen ref mv
 
 sendSignal :: Signal -> Int -> SV.Vector (EphemeralQueue Int) -> STVector s State -> ST s (EphemeralQueue Signal)
@@ -132,7 +130,7 @@ isConj ffLen x = x >= 2 + ffLen
 day20 :: IO ()
 day20 = do
   (keyMap, (ffLen, (ref, state))) <- readInput <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
-  let iTargets = IS.fromList $ map (keyMap Map.!) targets
+  let iTargets = foldl' setBit 0 $ map (keyMap Map.!) targets
   putStrLn
     . ("day20a: " ++)
     . show
