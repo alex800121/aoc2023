@@ -1,133 +1,143 @@
-{-# LANGUAGE DeriveAnyClass #-}
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE TupleSections #-}
 
 module Day20 where
 
-import Data.Bifunctor (Bifunctor (..))
-import Data.Function (on)
-import Data.HashMap.Strict qualified as H
-import Data.Hashable (Hashable)
-import Data.List (delete, find, findIndex, findIndices, foldl1', (\\))
+import Control.Lens
+import Control.Monad (foldM, when)
+import Control.Monad.ST.Strict (ST, runST)
+import Data.Bits (Bits (..))
+import Data.Char (isAlpha)
+import Data.IntSet (IntSet)
+import Data.IntSet qualified as IS
+import Data.List (partition, sort)
+import Data.Map.Strict qualified as Map
 import Data.Maybe (fromMaybe, mapMaybe)
+import Data.Vector.Strict qualified as SV
+import Data.Vector.Strict.Mutable qualified as SMV
+import Data.Vector.Unboxed (Vector)
+import Data.Vector.Unboxed qualified as V
+import Data.Vector.Unboxed.Mutable (STVector)
+import Data.Vector.Unboxed.Mutable qualified as M
+import Data.Word
 import Debug.Trace
-import GHC.Generics (Generic)
-import MyLib
 import Paths_AOC2023
-import Text.Megaparsec
-import Text.Megaparsec.Char
+import Queue.Ephemeral (EphemeralQueue)
+import Queue.Ephemeral qualified as Q
 
--- data Pulse = Low | High deriving (Show, Ord, Eq)
+targets = ["js", "zb", "rr", "bs"]
 
--- data Switch = On | Off deriving (Show, Ord, Eq)
+-- Vector (Word, Word, Int, Int)
+-- flip    send  state low  high
+-- conj    send  from  low  high
+-- flip state : on -> 1, off -> 0
+-- conj "from" state : low -> 1, high -> 0
+-- vector[0]: broadcaster
+-- vector[1]: rx
+-- vector[2..(1 + isFF)]: flipflops
+-- vector[(2 + isFF)..]: conj
 
-type Pulse = Bool
+type Signal = (Int, Int, Bool)
 
-type Switch = Bool
-
-pattern On = True
-
-pattern Off = False
+type State = (Word, Int, Int)
 
 pattern Low = True
 
 pattern High = False
 
--- instance Enum Switch where
---   fromEnum On = 0
---   fromEnum Off = 1
---   toEnum x = case x `mod` 2 of
---     0 -> On
---     1 -> Off
---
--- instance Enum Pulse where
---   fromEnum Low = 0
---   fromEnum High = 1
---   toEnum x = case x `mod` 2 of
---     0 -> Low
---     1 -> High
-
-data Module
-  = Broadcaster {_getNext :: [String]}
-  | Flip {_getSwitch :: Switch, _getNext :: [String]}
-  | Conj {_getPulse :: Signal, _getNext :: [String]}
-  | Output {_getReceived :: [(String, Pulse)]}
-  deriving (Show, Ord, Eq, Generic, Hashable)
-
-type GameState = H.HashMap String Module
-
-type Signal = H.HashMap String Pulse
-
-sendSignal :: (String, Pulse) -> Module -> (Module, [(String, Pulse)])
-sendSignal (_, On) b@(Broadcaster n) = (b, map (,On) n)
-sendSignal (_, p) f@(Flip s n) = if p then (Flip (not s) n, map (,s) n) else (f, [])
-sendSignal (from, p) (Conj s n) =
-  let s' = H.insert from p s
-      c' = Conj s' n
-      p' = not (or s')
-   in (c', map (,p') n)
-sendSignal x (Output xs) = (Output (xs <> [x]), [])
-
-parseBroadcaster :: Parser GameState
-parseBroadcaster = do
-  string "broadcaster -> "
-  H.singleton "broadcaster" . Broadcaster <$> sepBy (many letterChar) (char ',' >> space)
-
-parseFlip :: Parser GameState
-parseFlip = do
-  char '%'
-  s <- many letterChar
-  string " -> "
-  H.singleton s . Flip Off <$> sepBy (many letterChar) (char ',' >> space)
-
-parseConj :: Parser GameState
-parseConj = do
-  char '&'
-  s <- many letterChar
-  string " -> "
-  H.singleton s . Conj H.empty <$> sepBy (many letterChar) (char ',' >> space)
-
-parseModules :: Parser GameState
-parseModules = choice [parseBroadcaster, parseFlip, parseConj]
-
-pushButton :: (GameState, ((Int, ([String], Int)), (Int, Int))) -> (GameState, ((Int, ([String], Int)), (Int, Int)))
-pushButton gs@(!g', ((!i, (!targets, !t)), (!low, !high))) = second (first (first (+ 1))) $ f [("broadcaster", ("button", Low))] gs
+readSend :: Word -> EphemeralQueue Int
+readSend = f . (0,)
   where
-    f [] g = g
-    f ((!to, (!from, !sig)) : xs) (!g, !acc) = f xs' (g', acc')
+    f (i, x)
+      | x == 0 = Q.empty
+      | m == 0 = f (succ i, d)
+      | otherwise = Q.enqueue i (f (succ i, d))
       where
-        acc' = bimap (if to `elem` targets && sig then second (bimap (delete to) (lcm (i + 1))) else id) (if sig then first (+ 1) else second (+ 1)) acc
-        (module', nextSig) = sendSignal (from, sig) $ fromMaybe (Output []) (g H.!? to)
-        xs' = xs <> map (\(a, b) -> (a, (to, b))) nextSig
-        g' = H.insert to module' g
+        (d, m) = x `divMod` 2
 
-fixConjInput :: GameState -> GameState
-fixConjInput g =
-  H.mapWithKey
-    ( \k a -> case a of
-        Conj m n ->
-          let ns = H.keys $ H.filter (\x -> k `elem` _getNext x) g
-           in Conj (H.fromList (map (,Low) ns)) n
-        x -> x
+solveA :: Int -> SV.Vector (EphemeralQueue Int) -> Vector State -> Int
+solveA ffLen ref v = runST $ do
+  mv <- V.thaw v
+  mapM_ (\_ -> f mv (Q.singleton (0, 0, Low))) [0 .. 999]
+  (low, high) <- M.foldl' (\(a, b) (d, low, high) -> (a + low, b + high)) (0, 0) mv
+  pure (low * high)
+  where
+    f :: STVector s State -> EphemeralQueue Signal -> ST s ()
+    f mv Q.Empty = pure ()
+    f mv (Q.Full s ss) = f mv . (ss <>) =<< sendSignal s ffLen ref mv
+
+solveB :: Int -> SV.Vector (EphemeralQueue Int) -> Vector State -> IntSet -> Int
+solveB ffLen ref v iTargets = runST $ do
+  mv <- V.thaw v
+  f 1 1 iTargets mv button
+  where
+    button = Q.singleton (0, 0, Low)
+    f :: Int -> Int -> IntSet -> STVector s State -> EphemeralQueue Signal -> ST s Int
+    f i acc t mv q
+      | IS.null t = pure acc
+      | Q.Empty <- q = f (succ i) acc t mv button
+      | Q.Full s@(origin, to, sig) ss <- q,
+        (acc', t') <- if origin `IS.member` t && not sig then (lcm acc i, IS.delete origin t) else (acc, t) =
+          f i acc' t' mv . (ss <>) =<< sendSignal s ffLen ref mv
+
+sendSignal :: Signal -> Int -> SV.Vector (EphemeralQueue Int) -> STVector s State -> ST s (EphemeralQueue Signal)
+sendSignal (origin, to, signal) ffLen ref v
+  | to == 0 = do
+      M.modify v (over _2 succ) 0
+      pure $ Q.map (to,,Low) $ ref SV.! 0
+  | to == 1 = M.modify v (over (if signal then _2 else _3) succ) 1 >> pure Q.empty
+  | isConj ffLen to = do
+      (state, low, high) <- M.read v to
+      let state' = if signal then state `setBit` origin else state `clearBit` origin
+          sendSig = state' == 0
+      M.modify v (set _1 state' . over (if signal then _2 else _3) succ) to
+      pure (Q.map (to,,sendSig) (ref SV.! to))
+  | otherwise = do
+      (state, low, high) <- M.read v to
+      if signal
+        then do
+          M.write v to (state `complementBit` 0, succ low, high)
+          pure (Q.map (to,,state `testBit` 0) (ref SV.! to))
+        else M.modify v (over _3 succ) to >> pure Q.empty
+
+readInput :: String -> (Map.Map String Int, (Int, (SV.Vector (EphemeralQueue Int), Vector State)))
+readInput s =
+  ( keyMap,
+    ( ffLen,
+      runST $ do
+        ref <- SMV.replicate l Q.empty
+        v <- M.replicate l (0, 0, 0)
+        mapM_
+          ( \s -> do
+              let (name, send) = f s
+              mapM_
+                ( \t -> do
+                    SMV.modify ref (Q.enqueue t) name
+                    when (isConj ffLen t) (M.modify v (over _1 (`setBit` name)) t)
+                )
+                send
+          )
+          ss
+        (,) <$> SV.freeze ref <*> V.freeze v
     )
-    g
+  )
+  where
+    ss = map words $ sort $ lines s
+    keyMap = Map.fromList $ zip ("broadcaster" : "rx" : map (filter isAlpha . head) (init ss)) [0 ..]
+    l = Map.size keyMap
+    ffLen = length $ takeWhile ((== '%') . head . head) ss
+    f (name : _ : send) = (keyMap Map.! filter isAlpha name, mapMaybe ((keyMap Map.!?) . filter isAlpha) send)
+
+isConj ffLen x = x >= 2 + ffLen
 
 day20 :: IO ()
 day20 = do
-  -- input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> readFile "input/test20.txt"
-  input <- fixConjInput . H.unions . mapMaybe (parseMaybe parseModules) . lines <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
-  let targets = ["js", "zb", "rr", "bs"]
-      l = iterate pushButton (input, ((0, (targets, 1)), (0, 0)))
+  (keyMap, (ffLen, (ref, state))) <- readInput <$> (getDataDir >>= readFile . (++ "/input/input20.txt"))
+  let iTargets = IS.fromList $ map (keyMap Map.!) targets
   putStrLn
     . ("day20a: " ++)
     . show
-    . uncurry (*)
-    . snd
-    . snd
-    $ l !! 1000
+    $ solveA ffLen ref state
   putStrLn
     . ("day20b: " ++)
     . show
-    . fmap snd
-    $ find (null . fst) (map (snd . fst . snd) l)
+    $ solveB ffLen ref state iTargets

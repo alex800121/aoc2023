@@ -34,6 +34,7 @@ common shared
         vector,
         split,
         array,
+        queues,
         bytestring,
         base16-bytestring,
         multiset,

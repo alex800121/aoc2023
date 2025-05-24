@@ -8,7 +8,7 @@ import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
 import Data.Set (Set)
 import Data.Set qualified as Set
-import MyLib (Direction (..), drawMap)
+import MyLib (Direction (..), drawMap, toIndex)
 import Paths_AOC2023
 
 type Index = (Int, Int)
@@ -23,11 +23,6 @@ east = (1, 0)
 
 west = (-1, 0)
 
-toIndex :: Direction -> Index
-toIndex North = north
-toIndex South = south
-toIndex East = east
-toIndex West = west
 
 toDirection :: Index -> Direction
 toDirection (0, -1) = North
