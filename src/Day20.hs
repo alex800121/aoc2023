@@ -2,7 +2,7 @@
 
 module Day20 where
 
-import Control.Lens
+import Optics
 import Control.Monad (foldM, when)
 import Control.Monad.ST.Strict (ST, runST)
 import Data.Bits (Bits (..))

@@ -1,6 +1,6 @@
 module Day19 where
 
-import Control.Lens
+import Optics
 import Data.List (foldl')
 import Data.List.Split (splitOn)
 import Data.Map (Map)

@@ -42,7 +42,7 @@ common shared
         dlist,
         finite-typelits,
         groups,
-        lens,
+        optics,
         unordered-containers,
         hashable,
         matrix,
