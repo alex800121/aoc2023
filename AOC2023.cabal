@@ -49,7 +49,7 @@ common shared
         random,
         AOC
     default-extensions: TypeFamilies, OverloadedRecordDot, TypeApplications, DataKinds
-    ghc-options:  -fllvm -O2 
+    ghc-options: -O2
 
 benchmark main-bench
     type: exitcode-stdio-1.0
@@ -61,9 +61,7 @@ benchmark main-bench
         AOC2023,
         AOC
     default-language:    GHC2021
-    -- ghc-options: -O2 
-    -- ghc-options: -O2 -threaded
-    ghc-options: -threaded -rtsopts "-with-rtsopts=-N -T" -fllvm -O2 
+    ghc-options: -threaded -rtsopts "-with-rtsopts=-N -T" -O2
 
 library
     import: shared
@@ -138,10 +136,5 @@ executable AOC2023
         Day25,
         Paths_AOC2023
 
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-    -- build-depends:
-    --     AOC2020
-    
-    ghc-options: -threaded -rtsopts "-with-rtsopts=-N -T" -fllvm -O2 
+    ghc-options: -threaded -rtsopts "-with-rtsopts=-N -T" -O2
     hs-source-dirs:   app, src
